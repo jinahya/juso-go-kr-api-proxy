@@ -24,6 +24,7 @@ repositories {
 
 dependencies {
     runtimeOnly 'com.h2database:h2'
+    testRuntimeOnly 'io.netty:netty-resolver-dns-native-macos:4.1.100.Final:osx-aarch_64'
     testImplementation 'io.projectreactor:reactor-test'
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
@@ -43,7 +44,7 @@ tasks.named('test') {
 
 // ---------------------------------------------------------------------------------------------------------------------
 
-final TAG_LONG_RUNNING = "long-running"
+//final TAG_LONG_RUNNING = "long-running"
 final TEST_NAME_PATTERN_INTEGRATION = "*IT"
 
 tasks.withType(Test) {
@@ -52,63 +53,63 @@ tasks.withType(Test) {
 
 tasks.named('test') {
     useJUnitPlatform {
-        excludeTags TAG_LONG_RUNNING
+//        excludeTags TAG_LONG_RUNNING
     }
     filter {
         excludeTestsMatching TEST_NAME_PATTERN_INTEGRATION
     }
     if (!System.properties.containsKey('spring.profiles.active')) {
-        systemProperty "spring.profiles.active", "local" // equivalent to "development,private"
+        systemProperty "spring.profiles.active", "default"
     }
 }
 
-tasks.register("testLongRunning", Test) {
-    // https://docs.gradle.org/current/samples/sample_jvm_multi_project_with_additional_test_types.html
-    description = 'Runs long-running tests.'
-    group = 'verification'
-    useJUnitPlatform {
-        includeTags TAG_LONG_RUNNING
-    }
-    filter {
-        excludeTestsMatching TEST_NAME_PATTERN_INTEGRATION
-    }
-    if (!System.properties.containsKey('spring.profiles.active')) {
-        systemProperty "spring.profiles.active", "local" // equivalent to "development,private"
-    }
-    shouldRunAfter(test)
-}
+//tasks.register("testLongRunning", Test) {
+//    // https://docs.gradle.org/current/samples/sample_jvm_multi_project_with_additional_test_types.html
+//    description = 'Runs long-running tests.'
+//    group = 'verification'
+//    useJUnitPlatform {
+//        includeTags TAG_LONG_RUNNING
+//    }
+//    filter {
+//        excludeTestsMatching TEST_NAME_PATTERN_INTEGRATION
+//    }
+//    if (!System.properties.containsKey('spring.profiles.active')) {
+//        systemProperty "spring.profiles.active", "default" // equivalent to "development,private"
+//    }
+//    shouldRunAfter(test)
+//}
 
 tasks.register("integrationTest", Test) {
     // https://docs.gradle.org/current/samples/sample_jvm_multi_project_with_additional_test_types.html
     description = 'Runs integration tests.'
     group = 'verification'
     useJUnitPlatform {
-        excludeTags TAG_LONG_RUNNING
+//        excludeTags TAG_LONG_RUNNING
     }
     filter {
         includeTestsMatching TEST_NAME_PATTERN_INTEGRATION
     }
     shouldRunAfter(test)
     if (!System.properties.containsKey('spring.profiles.active')) {
-        systemProperty "spring.profiles.active", "local" // equivalent to "development,private"
+        systemProperty "spring.profiles.active", "default" // equivalent to "development,private"
     }
 }
 
-tasks.register("integrationTestLongRunning", Test) {
-    // https://docs.gradle.org/current/samples/sample_jvm_multi_project_with_additional_test_types.html
-    description = "Runs ..ITs with @Tag(\"" + TAG_LONG_RUNNING + "\")"
-    group = 'verification'
-    useJUnitPlatform {
-        includeTags TAG_LONG_RUNNING
-    }
-    filter {
-        includeTestsMatching TEST_NAME_PATTERN_INTEGRATION
-    }
-    shouldRunAfter(integrationTest)
-    if (!System.properties.containsKey('spring.profiles.active')) {
-        systemProperty "spring.profiles.active", "local" // equivalent to "development,private"
-    }
-}
+//tasks.register("integrationTestLongRunning", Test) {
+//    // https://docs.gradle.org/current/samples/sample_jvm_multi_project_with_additional_test_types.html
+//    description = "Runs ..ITs with @Tag(\"" + TAG_LONG_RUNNING + "\")"
+//    group = 'verification'
+//    useJUnitPlatform {
+//        includeTags TAG_LONG_RUNNING
+//    }
+//    filter {
+//        includeTestsMatching TEST_NAME_PATTERN_INTEGRATION
+//    }
+//    shouldRunAfter(integrationTest)
+//    if (!System.properties.containsKey('spring.profiles.active')) {
+//        systemProperty "spring.profiles.active", "local" // equivalent to "development,private"
+//    }
+//}
 
 jar {
     enabled = false // jar file 이 두개 생겨서 배포후 실행이 안됨.
@@ -121,7 +122,7 @@ bootJar {
 
 bootRun {
     if (!System.properties.containsKey('spring.profiles.active')) {
-        project.logger.info("setting spring.profiles.active with 'local'...");
-        systemProperty "spring.profiles.active", "local" // equivalent to "development,private"
+        project.logger.info("setting spring.profiles.active with 'default'...");
+        systemProperty "spring.profiles.active", "default" // equivalent to "development,private"
     }
 }

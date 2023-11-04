@@ -48,4 +48,6 @@ abstract class AbstractConfigurationProperties {
 
     @NotNull
     private Duration readTimeout = DEFAULT_READ_TIMEOUT;
+
+    private Boolean wiretap = false;
 }

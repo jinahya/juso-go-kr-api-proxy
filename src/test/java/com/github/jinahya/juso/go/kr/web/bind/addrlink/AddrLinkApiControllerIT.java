@@ -10,23 +10,15 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Optional;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.Stream;
 
-import static java.util.concurrent.ThreadLocalRandom.current;
 import static org.assertj.core.api.Assertions.assertThat;
 
 // https://docs.spring.io/spring-framework/reference/testing/webtestclient.html
 @Slf4j
 class AddrLinkApiControllerIT
         extends _AddrlinkControllerIT<AddrLinkApiController> {
-
-    private static Stream<String> keywords() {
-        return Stream.of(
-                "한국지역정보개발원",
-                "유현리"
-        );
-    }
 
     // -----------------------------------------------------------------------------------------------------------------
     AddrLinkApiControllerIT() {
@@ -35,8 +27,11 @@ class AddrLinkApiControllerIT
 
     // -----------------------------------------------------------------------------------------------------------------
     @ValueSource(strings = {
-            "한국지역정보개발원",
-            "경강로유현8길"
+//            "한국지역정보개발원",
+//            "경강로유현8길",
+//            "경강로유현8길 11",
+//            "경강로유현8길 11-10",
+            "강남대로 577"
     })
     @ParameterizedTest
     void __(final String keyword) {
@@ -44,8 +39,8 @@ class AddrLinkApiControllerIT
         request.setKeyword(keyword);
         request.setResultType(AddrLinkApiRequest.PROPERTY_VALUE_RESULT_TYPE_JSON);
         final var page = new AtomicInteger(1);
-        final var size = current().nextBoolean()
-                         ? current().nextInt(1, AddrLinkApiRequest.PROPERTY_MAX_COUNT_PER_PAGE + 1)
+        final var size = ThreadLocalRandom.current().nextBoolean()
+                         ? ThreadLocalRandom.current().nextInt(1, AddrLinkApiRequest.PROPERTY_MAX_COUNT_PER_PAGE + 1)
                          : null;
         while (true) {
             final var response = webTestClient()
