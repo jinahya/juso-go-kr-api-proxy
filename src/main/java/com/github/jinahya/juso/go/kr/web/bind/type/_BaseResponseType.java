@@ -1,5 +1,7 @@
-package com.github.jinahya.juso.go.kr.web.bind.addrlink.type;
+package com.github.jinahya.juso.go.kr.web.bind.type;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,17 +14,17 @@ import java.io.Serial;
 @Getter
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
-@NoArgsConstructor
-public class AddrLinkApiResponse
-        extends _AddrlinkResponseType<AddrLinkApiResult> {
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+public abstract class _BaseResponseType<RESULT extends _BaseResultsType<?>>
+        extends _BaseType {
 
     @Serial
-    private static final long serialVersionUID = -3105641034884770051L;
+    private static final long serialVersionUID = -7721822329899789683L;
 
     // -----------------------------------------------------------------------------------------------------------------
+    public static final String PROPERTY_NAME_RESULTS = "results";
 
     // -----------------------------------------------------------------------------------------------------------------
-
-    // -----------------------------------------------------------------------------------------------------------------
-
+    @JsonProperty(PROPERTY_NAME_RESULTS)
+    private RESULT results;
 }

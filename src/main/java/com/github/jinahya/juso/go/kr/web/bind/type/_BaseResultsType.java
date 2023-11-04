@@ -1,20 +1,29 @@
-package com.github.jinahya.juso.go.kr;
+package com.github.jinahya.juso.go.kr.web.bind.type;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.PositiveOrZero;
-import lombok.NoArgsConstructor;
+import lombok.AccessLevel;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
-import java.util.Objects;
+import java.io.Serial;
 
-@NoArgsConstructor
-public class Results {
+@Setter
+@Getter
+@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
+public class _BaseResultsType<DATA>
+        extends _BaseType {
 
-    // ---------------------------------------------------------------------------------------------------------- common
-    public static final String PROPERTY_NAME_COMMON = "common";
+    @Serial
+    private static final long serialVersionUID = -2677127086394138508L;
 
+    // -----------------------------------------------------------------------------------------------------------------
     public static class Common {
 
         // -------------------------------------------------------------------------------------------------- totalCount
@@ -71,42 +80,15 @@ public class Results {
 
     // -----------------------------------------------------------------------------------------------------------------
 
-    @Override
-    public String toString() {
-        return super.toString() + '{' +
-               "common=" + common +
-               '}';
-    }
-
-    @Override
-    public boolean equals(final Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (!(obj instanceof Results that)) {
-            return false;
-        }
-        return Objects.equals(common, that.common);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(common);
-    }
-
     // ---------------------------------------------------------------------------------------------------------- common
 
-    public Common getCommon() {
-        return common;
-    }
-
-    public void setCommon(final Common common) {
-        this.common = common;
-    }
+    // ------------------------------------------------------------------------------------------------------------ data
 
     // -----------------------------------------------------------------------------------------------------------------
-    @Valid
-    @NotNull
-    @JsonProperty(PROPERTY_NAME_COMMON)
     private Common common;
+
+    @JsonIgnore
+    @Setter(AccessLevel.PROTECTED)
+    @Getter(AccessLevel.PROTECTED)
+    private DATA data;
 }

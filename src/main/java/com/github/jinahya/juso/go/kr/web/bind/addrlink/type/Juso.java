@@ -1,14 +1,19 @@
 package com.github.jinahya.juso.go.kr.web.bind.addrlink.type;
 
-import com.github.jinahya.juso.go.kr.web.bind.type.__BaseType;
 import jakarta.validation.constraints.NotNull;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 
+@Setter
+@Getter
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
+@NoArgsConstructor
 public class Juso
-        extends __BaseType {
+        extends _AddrlinkType {
 
     // -----------------------------------------------------------------------------------------------------------------
 
@@ -33,7 +38,7 @@ public class Juso
     private String zipNo;
 
     @NotNull
-    private String amdCd;
+    private String admCd;
 
     @NotNull
     private String rnMgtSn; // 도로명코드

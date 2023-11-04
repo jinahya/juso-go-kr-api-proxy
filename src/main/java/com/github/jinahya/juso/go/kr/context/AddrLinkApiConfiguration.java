@@ -46,6 +46,7 @@ public class AddrLinkApiConfiguration {
                 .defaultHeader(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE)
                 .clientConnector(new ReactorClientHttpConnector(
                         HttpClient.create()
+                                .wiretap(true)
                                 .option(ChannelOption.CONNECT_TIMEOUT_MILLIS,
                                         Math.toIntExact(properties.getConnectTimeout().toMillis()))
                                 .doOnConnected(c -> {

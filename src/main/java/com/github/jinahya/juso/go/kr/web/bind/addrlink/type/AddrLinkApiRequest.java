@@ -9,6 +9,10 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.springframework.lang.Nullable;
+import org.springframework.web.util.UriBuilder;
+
+import java.lang.reflect.Modifier;
+import java.util.Objects;
 
 @Setter
 @Getter
@@ -59,6 +63,23 @@ public class AddrLinkApiRequest {
 
     // -----------------------------------------------------------------------------------------------------------------
 
+    // -----------------------------------------------------------------------------------------------------------------
+    public <T extends UriBuilder> T put(final T builder) {
+        Objects.requireNonNull(builder, "builder is null");
+        for (final var field : getClass().getDeclaredFields()) {
+            final var modifiers = field.getModifiers();
+            if (Modifier.isStatic(modifiers)) {
+                continue;
+            }
+            try {
+                builder.queryParam(field.getName(), field.get(this));
+            } catch (final ReflectiveOperationException roe) {
+                throw new RuntimeException(roe);
+            }
+        }
+        return builder;
+    }
+
     // -------------------------------------------------------------------------------------------------------- confmKey
 
     // ----------------------------------------------------------------------------------------------------- currentPage
@@ -82,12 +103,12 @@ public class AddrLinkApiRequest {
 
     @Min(PROPERTY_MIN_CURRENT_PAGE)
 //    @NotNull
-    private Integer currentPage = PROPERTY_DEFAULT_VALUE_CURRENT_PAGE;
+    private Integer currentPage;
 
     @Max(PROPERTY_MAX_COUNT_PER_PAGE)
     @Min(PROPERTY_MIN_COUNT_PER_PAGE)
 //    @NotNull
-    private Integer countPerPage = PROPERTY_DEFAULT_VALUE_COUNT_PER_PAGE;
+    private Integer countPerPage;
 
     @NotBlank
     private String keyword;
