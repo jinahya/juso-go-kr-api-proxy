@@ -1,0 +1,26 @@
+
+# https://spring.io/blog/2020/08/14/config-file-processing-in-spring-boot-2-4
+
+
+spring:
+  profiles:
+    group:
+      default: private, extended
+
+# ----------------------------------------------------------------------------------------------------------------------
+---
+spring:
+  config:
+    import: application-private.yaml
+  profiles:
+    active:
+      - private
+
+# ----------------------------------------------------------------------------------------------------------------------
+---
+spring:
+  config:
+    import: application-extended.yaml
+  profiles:
+    active:
+      - extended

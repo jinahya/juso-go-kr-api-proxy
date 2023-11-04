@@ -1,0 +1,6 @@
+# copy this file into `application-private.yaml` and set values
+
+jusoGoKr:
+  addrlink:
+    addrLinkApi:
+      confmKey: # 도로명주소 검색 API 승인키
