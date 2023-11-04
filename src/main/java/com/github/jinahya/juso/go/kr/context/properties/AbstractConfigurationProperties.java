@@ -14,7 +14,7 @@ import java.time.Duration;
 @Setter
 @Getter
 @NoArgsConstructor(access = AccessLevel.PACKAGE)
-abstract class AbstractConfigurationProperties {
+public abstract class AbstractConfigurationProperties {
 
     static final Duration DEFAULT_CONNECT_TIMEOUT = Duration.ofSeconds(1L);
 

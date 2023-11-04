@@ -4,3 +4,5 @@ jusoGoKr:
   addrlink:
     addrLinkApi:
       confmKey: # 도로명주소 검색 API 승인키
+    addrEngApi:
+      confmKey: # 영문주소 검색 API 승인키
