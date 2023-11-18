@@ -42,8 +42,10 @@ public class AddrLinkService {
     // -----------------------------------------------------------------------------------------------------------------
     @AddrLinkApiConfiguration.AddrLinkApi
     @Autowired
+    @SuppressWarnings({"java:S6813"})
     private WebClient webClient;
 
     @Autowired
+    @SuppressWarnings({"java:S6813"})
     private Validator validator;
 }

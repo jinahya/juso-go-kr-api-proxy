@@ -10,6 +10,8 @@ import com.github.jinahya.juso.go.kr.web.bind.addrlink.type.AddrLinkApiResponse;
 import com.github.jinahya.juso.go.kr.web.bind.type._BaseResultsType;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration;
 import org.springframework.boot.autoconfigure.validation.ValidationAutoConfiguration;
@@ -32,15 +34,19 @@ import static org.assertj.core.api.Assertions.assertThat;
 class AddrLinkServiceIT {
 
     // -----------------------------------------------------------------------------------------------------------------
-    @Test
-    void __() throws JsonProcessingException {
+    @ValueSource(strings = {
+            "한국지역정보개발원",
+            "청와대"
+    })
+    @ParameterizedTest
+    void __(final String keyword) throws JsonProcessingException {
         final var request = new AddrLinkApiRequest();
         request.setConfmKey(properties.getConfmKey());
-        request.setKeyword("한국지역정보개발원");
+        request.setKeyword(keyword);
         request.setResultType("json");
         request.setCountPerPage(10);
         for (var currentPage = 1; ; currentPage++) {
-            if (currentPage > 5) {
+            if (false && currentPage > 5) {
                 break;
             }
             request.setCurrentPage(currentPage);
