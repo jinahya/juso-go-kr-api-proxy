@@ -3,26 +3,27 @@ package com.github.jinahya.juso.go.kr.context.properties;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Objects;
 
-@SpringBootTest
-@Slf4j
-abstract class AbstractConfigurationPropertiesTest<PROPERTIES extends AbstractConfigurationProperties> {
+import static org.assertj.core.api.Assertions.assertThat;
 
-    AbstractConfigurationPropertiesTest(final Class<PROPERTIES> propertiesClass) {
+@Slf4j
+abstract class _AddrApiConfigurationPropertiesTest<PROPERTIES extends _AddrApiConfigurationProperties> {
+
+    _AddrApiConfigurationPropertiesTest(final Class<PROPERTIES> propertiesClass) {
         super();
         this.propertiesClass = Objects.requireNonNull(propertiesClass, "propertiesClass is null");
     }
 
     @Test
-    void __() {
-        log.debug("properties: {}", properties);
+    void newHttpClient__() {
+        final var httpClient = propertiesInstance.newHttpClient();
+        assertThat(httpClient).isNotNull();
     }
 
     protected Class<PROPERTIES> propertiesClass;
 
     @Autowired
-    private PROPERTIES properties;
+    private PROPERTIES propertiesInstance;
 }

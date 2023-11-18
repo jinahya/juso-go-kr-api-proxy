@@ -7,6 +7,7 @@ import lombok.Setter;
 import lombok.ToString;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
+import reactor.netty.http.client.HttpClient;
 
 @ConfigurationProperties(prefix = "juso-go-kr.addrlink.addr-eng-api")
 @Configuration
@@ -16,7 +17,16 @@ import org.springframework.context.annotation.Configuration;
 @ToString(callSuper = true)
 @NoArgsConstructor
 public class AddrEngApiConfigurationProperties
-        extends AbstractConfigurationProperties {
+        extends _AddrApiConfigurationProperties {
 
     public static final String BASE_URL = "https://business.juso.go.kr/addrlink/addrEngApi.do";
+
+    @Override
+    public HttpClient newHttpClient() {
+        return super.newHttpClient()
+                .baseUrl(getBaseUrl());
+    }
+
+    // -----------------------------------------------------------------------------------------------------------------
+    private String baseUrl = BASE_URL;
 }

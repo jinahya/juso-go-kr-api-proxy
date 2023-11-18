@@ -32,7 +32,7 @@ import reactor.core.publisher.Mono;
 )
 @RequiredArgsConstructor(access = AccessLevel.PACKAGE)
 class AddrEngApiController
-        extends _AddrlinkController {
+        extends _AddrLinkController {
 
     static final String REQUEST_MAPPING_PATH = "/addrlink/addrEngApi.do";
 

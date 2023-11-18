@@ -16,7 +16,7 @@ import java.lang.annotation.Target;
 @Configuration
 @RequiredArgsConstructor
 public class AddrEngApiConfiguration
-        extends AbstractConfiguration<AddrEngApiConfigurationProperties> {
+        extends _AddrApiConfiguration<AddrEngApiConfigurationProperties> {
 
     @Qualifier
     @Documented
@@ -35,6 +35,6 @@ public class AddrEngApiConfiguration
     @AddrEngApi
     @Bean
     WebClient webClient() {
-        return webClientBuilder().build();
+        return super.webClient();
     }
 }

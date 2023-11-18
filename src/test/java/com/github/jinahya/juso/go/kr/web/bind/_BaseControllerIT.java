@@ -2,20 +2,17 @@ package com.github.jinahya.juso.go.kr.web.bind;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Arrays;
-import java.util.Objects;
 
-@SpringBootTest
 @Slf4j
-public abstract class _BaseControllerIT<CONTROLLER extends _BaseController> {
+public abstract class _BaseControllerIT<CONTROLLER extends _BaseController>
+        extends __BaseControllerTestBase<CONTROLLER> {
 
     protected _BaseControllerIT(final Class<CONTROLLER> controllerClass) {
-        super();
-        this.controllerClass = Objects.requireNonNull(controllerClass, "controllerClass is null");
+        super(controllerClass);
     }
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -48,8 +45,6 @@ public abstract class _BaseControllerIT<CONTROLLER extends _BaseController> {
     }
 
     // -----------------------------------------------------------------------------------------------------------------
-    protected final Class<CONTROLLER> controllerClass;
-
     @Autowired
     private CONTROLLER controllerInstance;
 

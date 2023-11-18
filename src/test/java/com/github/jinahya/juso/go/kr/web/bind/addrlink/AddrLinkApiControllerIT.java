@@ -18,7 +18,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 // https://docs.spring.io/spring-framework/reference/testing/webtestclient.html
 @Slf4j
 class AddrLinkApiControllerIT
-        extends _AddrlinkControllerIT<AddrLinkApiController> {
+        extends _AddrLinkControllerIT<AddrLinkApiController> {
 
     // -----------------------------------------------------------------------------------------------------------------
     AddrLinkApiControllerIT() {

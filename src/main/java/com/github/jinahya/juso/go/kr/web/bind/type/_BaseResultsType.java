@@ -24,6 +24,10 @@ public class _BaseResultsType<DATA>
     private static final long serialVersionUID = -2677127086394138508L;
 
     // -----------------------------------------------------------------------------------------------------------------
+    @Setter
+    @Getter
+    @EqualsAndHashCode
+    @ToString
     public static class Common {
 
         // -------------------------------------------------------------------------------------------------- totalCount
@@ -49,6 +53,8 @@ public class _BaseResultsType<DATA>
 
         // --------------------------------------------------------------------------------------------------- errorCode
         public static final String PROPERTY_NAME_ERROR_CODE = "errorCode";
+
+        public static final String PROPERTY_VALUE_ERROR_CODE_0 = "0";
 
         // ------------------------------------------------------------------------------------------------ errorMessage
         public static final String PROPERTY_NAME_ERROR_MESSAGE = "errorMessage";
