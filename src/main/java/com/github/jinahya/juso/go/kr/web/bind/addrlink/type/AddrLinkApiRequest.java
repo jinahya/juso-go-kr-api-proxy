@@ -1,7 +1,7 @@
 package com.github.jinahya.juso.go.kr.web.bind.addrlink.type;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.github.jinahya.juso.go.kr.streotype.AddrLinkService;
+import com.github.jinahya.juso.go.kr.web.bind.type._BaseTypeGroup;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -99,17 +99,17 @@ public class AddrLinkApiRequest {
     // ------------------------------------------------------------------------------------------------------- addInfoYn
 
     // -----------------------------------------------------------------------------------------------------------------
-    @NotBlank(groups = {AddrLinkService.class}) // may be supplied by the properties
+    @NotBlank(groups = {_BaseTypeGroup.class}) // may be supplied by the properties
     @ToString.Exclude
     private String confmKey;
 
     @Min(PROPERTY_MIN_CURRENT_PAGE)
-    @NotNull(groups = {AddrLinkService.class}) // may be supplied by the properties
+    @NotNull(groups = {_BaseTypeGroup.class}) // may be supplied by the properties
     private Integer currentPage;
 
     @Max(PROPERTY_MAX_COUNT_PER_PAGE)
     @Min(PROPERTY_MIN_COUNT_PER_PAGE)
-    @NotNull(groups = {AddrLinkService.class}) // may be supplied by the properties
+    @NotNull(groups = {_BaseTypeGroup.class}) // may be supplied by the properties
     private Integer countPerPage;
 
     @NotBlank

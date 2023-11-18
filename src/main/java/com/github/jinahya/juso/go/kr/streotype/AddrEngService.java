@@ -21,11 +21,10 @@ import reactor.core.publisher.Mono;
 @Service
 @ToString
 @NoArgsConstructor(access = AccessLevel.PACKAGE)
-//@RequiredArgsConstructor(access = AccessLevel.PACKAGE)
 @Slf4j
-public class AddrLinkService {
+public class AddrEngService {
 
-    public static final String CACHE_NAME_ADDR_LINK = "addrLink";
+    public static final String CACHE_NAME_ADDR_LINK = "addrEng";
 
     // -----------------------------------------------------------------------------------------------------------------
 //    @Cacheable(cacheNames = {CACHE_NAME_ADDR_LINK})
@@ -42,8 +41,10 @@ public class AddrLinkService {
     // -----------------------------------------------------------------------------------------------------------------
     @AddrLinkApiConfiguration.AddrLinkApi
     @Autowired
+    @SuppressWarnings({"java:S6813"})
     private WebClient webClient;
 
     @Autowired
+    @SuppressWarnings({"java:S6813"})
     private Validator validator;
 }

@@ -1,4 +1,4 @@
-package com.github.jinahya;
+package com.github.jinahya.juso.go.kr;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

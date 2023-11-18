@@ -5,7 +5,9 @@
   <root level="INFO">
     <appender-ref ref="CONSOLE"/>
   </root>
-  <!--  <logger name="org.springframework.web" level="DEBUG"/>-->
+  <logger name="org.springdoc" level="DEBUG"/>
+<!--  <logger name="org.springframework" level="DEBUG"/>-->
+  <logger name="org.springframework.web" level="DEBUG"/>
   <logger name="com.github.jinahya" level="DEBUG"/>
   <logger name="reactor.netty.http.client" level="debug"/>
 </configuration>

@@ -34,7 +34,7 @@ public class AddrLinkApiConfiguration
     }
 
     @AddrLinkApi
-    @Bean
+    @Bean(name = "addrLink")
     @Override
     WebClient webClient() {
         return super.webClient();

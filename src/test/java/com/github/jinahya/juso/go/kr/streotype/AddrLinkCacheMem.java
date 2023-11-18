@@ -7,7 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.cache.CacheManager;
 import org.springframework.stereotype.Component;
 
-@Component
+//@Component
 @RequiredArgsConstructor(access = AccessLevel.PACKAGE)
 class AddrLinkCacheMem
         implements AddrLinkCache {

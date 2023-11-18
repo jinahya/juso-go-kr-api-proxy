@@ -21,11 +21,11 @@ import java.util.Optional;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public abstract class _AddrApiConfigurationProperties {
 
-    static final Duration DEFAULT_CONNECT_TIMEOUT = Duration.ofSeconds(1L);
+    static final Duration DEFAULT_CONNECT_TIMEOUT = Duration.ofSeconds(2L);
 
-    static final Duration DEFAULT_WRITE_TIMEOUT = Duration.ofSeconds(2L);
+    static final Duration DEFAULT_WRITE_TIMEOUT = Duration.ofSeconds(4L);
 
-    static final Duration DEFAULT_READ_TIMEOUT = Duration.ofSeconds(4L);
+    static final Duration DEFAULT_READ_TIMEOUT = Duration.ofSeconds(8L);
 
     // -----------------------------------------------------------------------------------------------------------------
 

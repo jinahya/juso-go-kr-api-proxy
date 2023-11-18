@@ -31,11 +31,16 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     testCompileOnly 'org.projectlombok:lombok'
     testAnnotationProcessor 'org.projectlombok:lombok'
+//    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0'
+    implementation 'org.springdoc:springdoc-openapi-starter-webflux-ui:2.2.0'
+//    implementation 'org.webjars:webjars-locator:0.48'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-cache'
 //    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 //    implementation 'org.springframework.boot:spring-boot-starter-data-redis-reactive'
-    implementation 'org.springframework.boot:spring-boot-starter-json'
+//    implementation 'org.springframework.boot:spring-boot-starter-json'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
+//    implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     implementation 'org.springframework.data:spring-data-commons'
@@ -114,14 +119,14 @@ tasks.register("integrationTest", Test) {
 //    }
 //}
 
-jar {
-    enabled = false // jar file 이 두개 생겨서 배포후 실행이 안됨.
-}
-
-bootJar {
-    // https://stackoverflow.com/a/56497522/330457
-    archiveFileName = "${archiveBaseName.get()}.${archiveExtension.get()}"
-}
+//jar {
+//    enabled = false // jar file 이 두개 생겨서 배포후 실행이 안됨.
+//}
+//
+//bootJar {
+//    // https://stackoverflow.com/a/56497522/330457
+//    archiveFileName = "${archiveBaseName.get()}.${archiveExtension.get()}"
+//}
 
 bootRun {
     if (!System.properties.containsKey('spring.profiles.active')) {

@@ -8,6 +8,7 @@ import com.github.jinahya.juso.go.kr.web.bind.addrlink.type.AddrLinkApiResponse;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +46,7 @@ class AddrLinkApiController
             @Valid
             @ModelAttribute final AddrLinkApiRequest request,
             final BindingResult bindingResult,
-            @Positive
+            @PositiveOrZero
             @RequestParam(name = WebBindConstants.PARAM_NAME_PAGE, required = false) final Integer page,
             @Max(AddrLinkApiRequest.PROPERTY_MAX_COUNT_PER_PAGE)
             @Positive

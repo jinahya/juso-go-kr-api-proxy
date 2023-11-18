@@ -33,7 +33,8 @@ public class AddrEngApiConfiguration
     }
 
     @AddrEngApi
-    @Bean
+    @Bean(name = "addrEng")
+    @Override
     WebClient webClient() {
         return super.webClient();
     }

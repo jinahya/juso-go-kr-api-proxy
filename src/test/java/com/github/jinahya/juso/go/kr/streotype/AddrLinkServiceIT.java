@@ -12,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration;
+import org.springframework.boot.autoconfigure.validation.ValidationAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -23,7 +24,8 @@ import static org.assertj.core.api.Assertions.assertThat;
                 CacheConfiguration.class,
                 AddrLinkApiConfiguration.class,
                 AddrLinkApiConfigurationProperties.class,
-                JacksonAutoConfiguration.class
+                JacksonAutoConfiguration.class,
+                ValidationAutoConfiguration.class
         }
 )
 @Slf4j
@@ -36,7 +38,11 @@ class AddrLinkServiceIT {
         request.setConfmKey(properties.getConfmKey());
         request.setKeyword("한국지역정보개발원");
         request.setResultType("json");
+        request.setCountPerPage(10);
         for (var currentPage = 1; ; currentPage++) {
+            if (currentPage > 5) {
+                break;
+            }
             request.setCurrentPage(currentPage);
             System.out.println(objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(request));
             // ---------------------------------------------------------------------------------------------------- when
