@@ -5,6 +5,8 @@ import com.github.jinahya.juso.go.kr.streotype.AddrLinkService;
 import com.github.jinahya.juso.go.kr.web.bind.WebBindConstants;
 import com.github.jinahya.juso.go.kr.web.bind.addrlink.type.AddrLinkApiRequest;
 import com.github.jinahya.juso.go.kr.web.bind.addrlink.type.AddrLinkApiResponse;
+import com.github.jinahya.juso.go.kr.web.bind.type.util.KeywordUtils;
+import com.github.jinahya.juso.go.kr.web.bind.type.util.SqlReservedWords;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Positive;
@@ -57,18 +59,22 @@ class AddrLinkApiController
         if (request.getCurrentPage() == null && page != null) {
             request.setCurrentPage(page + 1);
         }
-        if (request.getCountPerPage() == null && page == null) {
+        if (request.getCountPerPage() == null && size != null) {
             request.setCountPerPage(size);
         }
+        request.setKeyword(
+                KeywordUtils.removeUnsafeCharacters(request.getKeyword())
+        );
+        request.setKeyword(
+                SqlReservedWords.removeAllSqlReservedWords(request.getKeyword())
+        );
         if (request.getResultType() == null) {
-            exchange.getRequest().getHeaders().getAccept().stream()
+            exchange.getRequest()
+                    .getHeaders()
+                    .getAccept()
+                    .stream()
                     .filter(MediaType.APPLICATION_JSON::equalsTypeAndSubtype).findFirst()
                     .ifPresent(v -> request.setResultType(AddrLinkApiRequest.PROPERTY_VALUE_RESULT_TYPE_JSON));
-        }
-        if (request.getResultType() == null) {
-            exchange.getRequest().getHeaders().getAccept().stream()
-                    .filter(MediaType.APPLICATION_XML::equalsTypeAndSubtype).findFirst()
-                    .ifPresent(v -> request.setResultType(AddrLinkApiRequest.PROPERTY_VALUE_RESULT_TYPE_XML));
         }
         return service.get(request);
     }

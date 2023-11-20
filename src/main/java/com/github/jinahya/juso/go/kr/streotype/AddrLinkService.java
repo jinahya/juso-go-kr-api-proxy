@@ -5,7 +5,6 @@ import com.github.jinahya.juso.go.kr.web.bind.addrlink.type.AddrLinkApiRequest;
 import com.github.jinahya.juso.go.kr.web.bind.addrlink.type.AddrLinkApiResponse;
 import com.github.jinahya.juso.go.kr.web.bind.type._BaseTypeGroup;
 import jakarta.validation.Valid;
-import jakarta.validation.Validator;
 import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
@@ -21,9 +20,9 @@ import reactor.core.publisher.Mono;
 @Service
 @ToString
 @NoArgsConstructor(access = AccessLevel.PACKAGE)
-//@RequiredArgsConstructor(access = AccessLevel.PACKAGE)
 @Slf4j
-public class AddrLinkService {
+public class AddrLinkService
+        extends _BaseService {
 
     public static final String CACHE_NAME_ADDR_LINK = "addrLink";
 
@@ -31,7 +30,6 @@ public class AddrLinkService {
 //    @Cacheable(cacheNames = {CACHE_NAME_ADDR_LINK})
     @Validated({_BaseTypeGroup.class})
     public Mono<AddrLinkApiResponse> get(@Valid @NotNull final AddrLinkApiRequest request) {
-        assert validator.validate(request, _BaseTypeGroup.class).isEmpty();
         return webClient
                 .get()
                 .uri(b -> request.put(b).build())
@@ -44,8 +42,4 @@ public class AddrLinkService {
     @Autowired
     @SuppressWarnings({"java:S6813"})
     private WebClient webClient;
-
-    @Autowired
-    @SuppressWarnings({"java:S6813"})
-    private Validator validator;
 }

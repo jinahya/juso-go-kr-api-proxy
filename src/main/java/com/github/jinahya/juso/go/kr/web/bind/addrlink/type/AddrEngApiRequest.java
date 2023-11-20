@@ -1,14 +1,11 @@
 package com.github.jinahya.juso.go.kr.web.bind.addrlink.type;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.github.jinahya.juso.go.kr.web.bind.type._BaseTypeConstants;
 import com.github.jinahya.juso.go.kr.web.bind.type._BaseTypeGroup;
-import com.github.jinahya.juso.go.kr.web.bind.type.util.SqlReservedWords;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -20,7 +17,8 @@ import java.util.Objects;
 
 @Setter
 @Getter
-public class AddrLinkApiRequest {
+public class AddrEngApiRequest
+        extends _AddrlinkType {
 
     // ----------------------------------------------------------------------------------------------------- currentPage
     public static final String PROPERTY_NAME_CURRENT_PAGE = "currentPage";
@@ -47,21 +45,6 @@ public class AddrLinkApiRequest {
     public static final String PROPERTY_VALUE_RESULT_TYPE_XML = "xml";
 
     public static final String PROPERTY_VALUE_RESULT_TYPE_JSON = "json";
-
-    // --------------------------------------------------------------------------------------------------------- hstryYn
-    public static final String PROPERTY_NAME_HSTRY_YN = "hstryYn";
-
-    // ------------------------------------------------------------------------------------------------------- firstSort
-    public static final String PROPERTY_NAME_FIRST_SORT = "firstSort";
-
-    public static final String PROPERTY_VALUE_FIRST_SORT_NONE = "none";
-
-    public static final String PROPERTY_VALUE_FIRST_SORT_ROAD = "road";
-
-    public static final String PROPERTY_VALUE_FIRST_SORT_LOCATION = "location";
-
-    // ------------------------------------------------------------------------------------------------------- addInfoYn
-    public static final String PROPERTY_NAME_ADD_INFO_YN = "addInfoYn";
 
     // -----------------------------------------------------------------------------------------------------------------
 
@@ -94,12 +77,6 @@ public class AddrLinkApiRequest {
 
     // ------------------------------------------------------------------------------------------------------ resultType
 
-    // --------------------------------------------------------------------------------------------------------- hysryYn
-
-    // ------------------------------------------------------------------------------------------------------- firstSort
-
-    // ------------------------------------------------------------------------------------------------------- addInfoYn
-
     // -----------------------------------------------------------------------------------------------------------------
     @NotBlank(groups = {_BaseTypeGroup.class}) // may be supplied by the properties
     @ToString.Exclude
@@ -120,14 +97,4 @@ public class AddrLinkApiRequest {
     @Nullable
     @JsonProperty(PROPERTY_NAME_RESULT_TYPE)
     private String resultType;
-
-    @Pattern(regexp = _BaseTypeConstants.PROPERTY_PATTERN_REGEXP_YN)
-    @JsonProperty(PROPERTY_NAME_HSTRY_YN)
-    private String hstryYn = _BaseTypeConstants.PROPERTY_VALUE_N;
-
-    @JsonProperty(PROPERTY_NAME_FIRST_SORT)
-    private String firstSort = PROPERTY_VALUE_FIRST_SORT_NONE;
-
-    @Pattern(regexp = _BaseTypeConstants.PROPERTY_PATTERN_REGEXP_YN)
-    private String addInfoYn = _BaseTypeConstants.PROPERTY_VALUE_N;
 }

@@ -8,8 +8,8 @@ import com.github.jinahya.juso.go.kr.context.properties.AddrLinkApiConfiguration
 import com.github.jinahya.juso.go.kr.web.bind.addrlink.type.AddrLinkApiRequest;
 import com.github.jinahya.juso.go.kr.web.bind.addrlink.type.AddrLinkApiResponse;
 import com.github.jinahya.juso.go.kr.web.bind.type._BaseResultsType;
+import jakarta.validation.Validator;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +31,12 @@ import static org.assertj.core.api.Assertions.assertThat;
         }
 )
 @Slf4j
-class AddrLinkServiceIT {
+class AddrLinkServiceIT
+        extends _BaseServiceIT<AddrLinkService> {
+
+    AddrLinkServiceIT() {
+        super(AddrLinkService.class);
+    }
 
     // -----------------------------------------------------------------------------------------------------------------
     @ValueSource(strings = {
@@ -50,34 +55,45 @@ class AddrLinkServiceIT {
                 break;
             }
             request.setCurrentPage(currentPage);
-            System.out.println(objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(request));
+            System.out.println(objectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(request));
             // ---------------------------------------------------------------------------------------------------- when
-            final AddrLinkApiResponse response = service.get(request).block();
+            final AddrLinkApiResponse response = serviceInstance().get(request).block();
             log.debug("response: {}", response);
-            System.out.println(objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(response));
+            System.out.println(objectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(response));
             // ---------------------------------------------------------------------------------------------------- then
-            assertThat(response).isNotNull();
+            assertThat(response).isNotNull().satisfies(r -> {
+                assertThat(r.getUnknownProperties()).isEmpty();
+            });
             final var results = response.getResults();
-            assertThat(results).isNotNull();
+            assertThat(results).isNotNull().satisfies(r -> {
+                assertThat(r.getUnknownProperties()).isEmpty();
+                ;
+            });
             final var common = results.getCommon();
             assertThat(common).isNotNull().satisfies(c -> {
                 assertThat(c.getErrorCode()).isEqualTo(_BaseResultsType.Common.PROPERTY_VALUE_ERROR_CODE_0);
+                assertThat(c.getUnknownProperties()).isEmpty();
             });
             final var juso = results.getJuso();
-            assertThat(juso).isNotNull();
+            assertThat(juso).isNotNull().allSatisfy(j -> {
+                assertThat(j).isNotNull();
+                assertThat(j.getUnknownProperties()).isEmpty();
+            });
             if (juso.isEmpty()) {
                 break;
             }
         }
     }
 
+    // ------------------------------------------------------------------------------------------------------ properties
+
+    // --------------------------------------------------------------------------------------------------------- service
+
+    // ---------------------------------------------------------------------------------------------------- objectMapper
+
+    // ------------------------------------------------------------------------------------------------------- validator
+
     // -----------------------------------------------------------------------------------------------------------------
     @Autowired
     private AddrLinkApiConfigurationProperties properties;
-
-    @Autowired
-    private AddrLinkService service;
-
-    @Autowired
-    private ObjectMapper objectMapper;
 }

@@ -26,9 +26,13 @@ public class _BaseResultsType<DATA>
     // -----------------------------------------------------------------------------------------------------------------
     @Setter
     @Getter
-    @EqualsAndHashCode
-    @ToString
-    public static class Common {
+    @EqualsAndHashCode(callSuper = true)
+    @ToString(callSuper = true)
+    public static class Common
+            extends _BaseType {
+
+        @Serial
+        private static final long serialVersionUID = -1440100445784510799L;
 
         // -------------------------------------------------------------------------------------------------- totalCount
         public static final String PROPERTY_NAME_TOTAL_COUNT = "totalCount";

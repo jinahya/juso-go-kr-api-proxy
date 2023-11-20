@@ -4,7 +4,7 @@ import com.github.jinahya.juso.go.kr.web.bind.WebBindConstants;
 import com.github.jinahya.juso.go.kr.web.bind.addrlink.type.AddrLinkApiRequest;
 import com.github.jinahya.juso.go.kr.web.bind.addrlink.type.AddrLinkApiResponse;
 import com.github.jinahya.juso.go.kr.web.bind.addrlink.type.AddrLinkApiResult;
-import com.github.jinahya.juso.go.kr.web.bind.addrlink.type.Juso;
+import com.github.jinahya.juso.go.kr.web.bind.addrlink.type.AddrLinkApiResultJuso;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -60,7 +60,7 @@ class AddrLinkApiControllerIT
             if (juso == null || juso.isEmpty()) {
                 break;
             }
-            for (final Juso j : juso) {
+            for (final AddrLinkApiResultJuso j : juso) {
                 log.debug("juso: {}", j);
             }
         }

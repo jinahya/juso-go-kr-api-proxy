@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.io.Serial;
 import java.util.List;
 
 @Setter
@@ -14,11 +13,8 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
 @NoArgsConstructor
-public class AddrLinkApiResult
-        extends _AddrlinkResultType<List<AddrLinkApiResultJuso>> {
-
-    @Serial
-    private static final long serialVersionUID = -3105641034884770051L;
+public class AddrEngApiResult
+        extends _AddrlinkResultType<List<AddrEngApiResultJuso>> {
 
     // -----------------------------------------------------------------------------------------------------------------
     public static final String PROPERTY_NAME_RESULTS = "results";
@@ -31,11 +27,11 @@ public class AddrLinkApiResult
 
     // -----------------------------------------------------------------------------------------------------------------
 
-    public List<AddrLinkApiResultJuso> getJuso() {
+    public List<AddrEngApiResultJuso> getJuso() {
         return super.getData();
     }
 
-    public void setJuso(final List<AddrLinkApiResultJuso> jusos) {
+    public void setJuso(final List<AddrEngApiResultJuso> jusos) {
         super.setData(jusos);
     }
 }
