@@ -10,6 +10,7 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 @EqualsAndHashCode
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -39,6 +40,7 @@ public abstract class _BaseType
 
     @JsonAnySetter
     public void putUnknownProperty(final String name, final Object value) {
+        Objects.requireNonNull(name, "name is null");
         getUnknownProperties().put(name, value);
     }
 
