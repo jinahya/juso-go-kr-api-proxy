@@ -1,9 +1,9 @@
 package com.github.jinahya.juso.go.kr.streotype;
 
 import com.github.jinahya.juso.go.kr.context.AddrLinkApiConfiguration;
-import com.github.jinahya.juso.go.kr.web.bind.addrlink.type.AddrLinkApiRequest;
-import com.github.jinahya.juso.go.kr.web.bind.addrlink.type.AddrLinkApiResponse;
-import com.github.jinahya.juso.go.kr.web.bind.type._BaseTypeGroup;
+import com.github.jinahya.juso.go.kr.web.bind._type._BaseTypeGroup;
+import com.github.jinahya.juso.go.kr.web.bind.addrlink._type.AddrLinkApiRequest;
+import com.github.jinahya.juso.go.kr.web.bind.addrlink._type.AddrLinkApiResponse;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;

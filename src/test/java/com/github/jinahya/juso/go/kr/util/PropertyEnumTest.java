@@ -1,6 +1,6 @@
 package com.github.jinahya.juso.go.kr.util;
 
-import com.github.jinahya.juso.go.kr.web.bind.type.util.PropertyEnum;
+import com.github.jinahya.juso.go.kr.web.bind._type.util.PropertyEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

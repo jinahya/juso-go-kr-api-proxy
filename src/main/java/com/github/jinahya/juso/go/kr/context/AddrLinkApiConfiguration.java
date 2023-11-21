@@ -33,10 +33,15 @@ public class AddrLinkApiConfiguration
 
     }
 
-    @AddrLinkApi
-    @Bean(name = "addrLink")
     @Override
-    WebClient webClient() {
+    WebClient.Builder webClientBuilder() {
+        return super.webClientBuilder()
+                .baseUrl(properties().getBaseUrl());
+    }
+
+    @AddrLinkApi
+    @Bean
+    WebClient webClientAddrLink() {
         return super.webClient();
     }
 }

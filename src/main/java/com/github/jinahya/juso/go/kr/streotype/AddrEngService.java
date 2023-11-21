@@ -1,9 +1,9 @@
 package com.github.jinahya.juso.go.kr.streotype;
 
-import com.github.jinahya.juso.go.kr.context.AddrLinkApiConfiguration;
-import com.github.jinahya.juso.go.kr.web.bind.addrlink.type.AddrLinkApiRequest;
-import com.github.jinahya.juso.go.kr.web.bind.addrlink.type.AddrLinkApiResponse;
-import com.github.jinahya.juso.go.kr.web.bind.type._BaseTypeGroup;
+import com.github.jinahya.juso.go.kr.context.AddrEngApiConfiguration;
+import com.github.jinahya.juso.go.kr.web.bind._type._BaseTypeGroup;
+import com.github.jinahya.juso.go.kr.web.bind.addrlink._type.AddrEngApiRequest;
+import com.github.jinahya.juso.go.kr.web.bind.addrlink._type.AddrEngApiResponse;
 import jakarta.validation.Valid;
 import jakarta.validation.Validator;
 import jakarta.validation.constraints.NotNull;
@@ -22,24 +22,24 @@ import reactor.core.publisher.Mono;
 @ToString
 @NoArgsConstructor(access = AccessLevel.PACKAGE)
 @Slf4j
-public class AddrEngService {
+public class AddrEngService
+        extends _BaseService {
 
-    public static final String CACHE_NAME_ADDR_LINK = "addrEng";
+    public static final String CACHE_NAME_ADDR_ENG = "addrEng";
 
     // -----------------------------------------------------------------------------------------------------------------
-//    @Cacheable(cacheNames = {CACHE_NAME_ADDR_LINK})
+//    @Cacheable(cacheNames = {CACHE_NAME_ADDR_ENG})
     @Validated({_BaseTypeGroup.class})
-    public Mono<AddrLinkApiResponse> get(@Valid @NotNull final AddrLinkApiRequest request) {
-        assert validator.validate(request, _BaseTypeGroup.class).isEmpty();
+    public Mono<AddrEngApiResponse> get(@Valid @NotNull final AddrEngApiRequest request) {
         return webClient
                 .get()
                 .uri(b -> request.put(b).build())
                 .retrieve()
-                .bodyToMono(AddrLinkApiResponse.class);
+                .bodyToMono(AddrEngApiResponse.class);
     }
 
     // -----------------------------------------------------------------------------------------------------------------
-    @AddrLinkApiConfiguration.AddrLinkApi
+    @AddrEngApiConfiguration.AddrEngApi
     @Autowired
     @SuppressWarnings({"java:S6813"})
     private WebClient webClient;

@@ -1,6 +1,5 @@
 package com.github.jinahya.juso.go.kr.context;
 
-import com.github.jinahya.juso.go.kr.context.properties.AddrLinkApiConfigurationProperties;
 import com.github.jinahya.juso.go.kr.context.properties._AddrApiConfigurationProperties;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -16,7 +15,6 @@ abstract class _AddrApiConfiguration<PROPERTIES extends _AddrApiConfigurationPro
     WebClient.Builder webClientBuilder() {
         final var httpClient = properties().newHttpClient();
         return WebClient.builder()
-                .baseUrl(AddrLinkApiConfigurationProperties.BASE_URL)
                 .defaultHeader(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE)
                 .clientConnector(new ReactorClientHttpConnector(httpClient));
     }

@@ -19,8 +19,11 @@ import reactor.netty.http.client.HttpClient;
 public class AddrEngApiConfigurationProperties
         extends _AddrApiConfigurationProperties {
 
-    public static final String BASE_URL = "https://business.juso.go.kr/addrlink/addrEngApi.do";
+    public static final String REQUEST_URI = "/addrlink/addrEngApi.do";
 
+    public static final String BASE_URL = "https://business.juso.go.kr" + REQUEST_URI;
+
+    // -----------------------------------------------------------------------------------------------------------------
     @Override
     public HttpClient newHttpClient() {
         return super.newHttpClient()

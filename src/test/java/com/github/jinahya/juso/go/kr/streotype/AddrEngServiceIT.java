@@ -1,10 +1,10 @@
 package com.github.jinahya.juso.go.kr.streotype;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.github.jinahya.juso.go.kr.context.AddrLinkApiConfiguration;
-import com.github.jinahya.juso.go.kr.context.properties.AddrLinkApiConfigurationProperties;
+import com.github.jinahya.juso.go.kr.context.AddrEngApiConfiguration;
+import com.github.jinahya.juso.go.kr.context.properties.AddrEngApiConfigurationProperties;
 import com.github.jinahya.juso.go.kr.web.bind._type._BaseResultsType;
-import com.github.jinahya.juso.go.kr.web.bind.addrlink._type.AddrLinkApiRequest;
+import com.github.jinahya.juso.go.kr.web.bind.addrlink._type.AddrEngApiRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -17,20 +17,20 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(
         classes = {
-                AddrLinkService.class,
+                AddrEngService.class,
 //                CacheConfiguration.class,
-                AddrLinkApiConfiguration.class,
-                AddrLinkApiConfigurationProperties.class,
+                AddrEngApiConfiguration.class,
+                AddrEngApiConfigurationProperties.class,
                 JacksonAutoConfiguration.class,
                 ValidationAutoConfiguration.class
         }
 )
 @Slf4j
-class AddrLinkServiceIT
-        extends _BaseServiceIT<AddrLinkService> {
+class AddrEngServiceIT
+        extends _BaseServiceIT<AddrEngService> {
 
-    AddrLinkServiceIT() {
-        super(AddrLinkService.class);
+    AddrEngServiceIT() {
+        super(AddrEngService.class);
     }
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -40,7 +40,7 @@ class AddrLinkServiceIT
     })
     @ParameterizedTest
     void __(final String keyword) throws JsonProcessingException {
-        final var request = new AddrLinkApiRequest();
+        final var request = new AddrEngApiRequest();
         request.setConfmKey(properties.getConfmKey());
         request.setKeyword(keyword);
         request.setResultType("json");
@@ -70,8 +70,7 @@ class AddrLinkServiceIT
                 assertThat(c.getUnknownProperties()).isEmpty();
             });
             final var juso = results.getJuso();
-            assertThat(juso).isNotNull().allSatisfy(j -> {
-                assertThat(j).isNotNull();
+            assertThat(juso).isNotNull().doesNotContainNull().allSatisfy(j -> {
                 assertThat(j.getUnknownProperties()).isEmpty();
             });
             assertThat(validator().validate(response)).isEmpty();
@@ -91,5 +90,5 @@ class AddrLinkServiceIT
 
     // -----------------------------------------------------------------------------------------------------------------
     @Autowired
-    private AddrLinkApiConfigurationProperties properties;
+    private AddrEngApiConfigurationProperties properties;
 }

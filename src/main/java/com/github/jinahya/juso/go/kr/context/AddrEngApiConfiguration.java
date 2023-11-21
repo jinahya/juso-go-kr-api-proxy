@@ -32,10 +32,16 @@ public class AddrEngApiConfiguration
 
     }
 
-    @AddrEngApi
-    @Bean(name = "addrEng")
+    // -----------------------------------------------------------------------------------------------------------------
     @Override
-    WebClient webClient() {
+    WebClient.Builder webClientBuilder() {
+        return super.webClientBuilder()
+                .baseUrl(properties().getBaseUrl());
+    }
+
+    @AddrEngApi
+    @Bean
+    WebClient webClientAddrEng() {
         return super.webClient();
     }
 }

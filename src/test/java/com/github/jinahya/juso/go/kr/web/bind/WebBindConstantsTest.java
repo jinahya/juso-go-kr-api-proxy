@@ -15,9 +15,6 @@ class WebBindConstantsTest {
         final var field = SpringDataWebProperties.Pageable.class.getDeclaredField("sizeParameter");
     }
 
-
-
-
     @Test
     void __() {
         var value = Double.MIN_VALUE;

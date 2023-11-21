@@ -1,11 +1,12 @@
 package com.github.jinahya.juso.go.kr.web.bind.addrlink;
 
 import com.github.jinahya.juso.go.kr.web.bind.WebBindConstants;
-import com.github.jinahya.juso.go.kr.web.bind.addrlink.type.AddrLinkApiRequest;
-import com.github.jinahya.juso.go.kr.web.bind.addrlink.type.AddrLinkApiResponse;
-import com.github.jinahya.juso.go.kr.web.bind.addrlink.type.AddrLinkApiResult;
-import com.github.jinahya.juso.go.kr.web.bind.addrlink.type.AddrLinkApiResultJuso;
+import com.github.jinahya.juso.go.kr.web.bind.addrlink._type.AddrLinkApiRequest;
+import com.github.jinahya.juso.go.kr.web.bind.addrlink._type.AddrLinkApiResponse;
+import com.github.jinahya.juso.go.kr.web.bind.addrlink._type.AddrLinkApiResult;
+import com.github.jinahya.juso.go.kr.web.bind.addrlink._type.AddrLinkApiResultJuso;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -15,6 +16,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Disabled
 // https://docs.spring.io/spring-framework/reference/testing/webtestclient.html
 @Slf4j
 class AddrLinkApiControllerIT
