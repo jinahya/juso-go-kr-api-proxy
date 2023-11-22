@@ -1,5 +1,8 @@
 package com.github.jinahya.juso.go.kr.context.properties;
 
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,14 +19,18 @@ abstract class _AddrApiConfigurationPropertiesTest<PROPERTIES extends _AddrApiCo
         this.propertiesClass = Objects.requireNonNull(propertiesClass, "propertiesClass is null");
     }
 
+    // -----------------------------------------------------------------------------------------------------------------
     @Test
-    void newHttpClient__() {
+    void newHttpClient_NotNull_() {
         final var httpClient = propertiesInstance.newHttpClient();
         assertThat(httpClient).isNotNull();
     }
 
+    // -----------------------------------------------------------------------------------------------------------------
     protected Class<PROPERTIES> propertiesClass;
 
     @Autowired
+    @Accessors(fluent = true)
+    @Getter(AccessLevel.PACKAGE)
     private PROPERTIES propertiesInstance;
 }

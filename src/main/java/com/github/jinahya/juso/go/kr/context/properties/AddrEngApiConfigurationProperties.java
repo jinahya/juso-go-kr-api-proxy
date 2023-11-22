@@ -6,11 +6,12 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 import reactor.netty.http.client.HttpClient;
 
+@Component
 @ConfigurationProperties(prefix = "juso-go-kr.addrlink.addr-eng-api")
-@Configuration
+//@Configuration
 @Setter
 @Getter
 @EqualsAndHashCode(callSuper = true)

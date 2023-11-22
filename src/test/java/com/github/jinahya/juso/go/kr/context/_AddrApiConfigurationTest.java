@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Objects;
 
-class _AddrApiConfigurationTest<CONFIGURATION extends _AddrApiConfiguration<?>> {
+abstract class _AddrApiConfigurationTest<CONFIGURATION extends _AddrApiConfiguration<?>> {
 
     _AddrApiConfigurationTest(final Class<CONFIGURATION> configurationClass) {
         super();
