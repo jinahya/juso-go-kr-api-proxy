@@ -1,0 +1,33 @@
+{
+  "results": {
+    "common": {
+      "totalCount": "1",
+      "currentPage": "1",
+      "countPerPage": "5",
+      "errorCode": "0",
+      "errorMessage": "정상"
+    },
+    "juso": [
+      {
+        "roadAddr": "301 Seongam-ro, Mapo-gu, Seoul",
+        "jibunAddr": "1595 Sangam-dong, Mapo-gu, Seoul",
+        "zipNo": "03923",
+        "admCd": "1144012700",
+        "rnMgtSn": "114403113012",
+        "bdKdcd": "0",
+        "siNm": "Seoul",
+        "sggNm": "Mapo-gu",
+        "emdNm": "Sangam-dong",
+        "liNm": "",
+        "rn": "Seongam-ro",
+        "udrtYn": "0",
+        "buldMnnm": "301",
+        "buldSlno": "0",
+        "mtYn": "0",
+        "lnbrMnnm": "1595",
+        "lnbrSlno": "0",
+        "korAddr": "서울특별시 마포구 성암로 301"
+      }
+    ]
+  }
+}

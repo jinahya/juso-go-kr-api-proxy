@@ -6,27 +6,61 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.experimental.Accessors;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.json.JsonTest;
 import org.springframework.boot.test.json.JacksonTester;
 
+import java.beans.IntrospectionException;
+import java.beans.Introspector;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UncheckedIOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Objects;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.function.UnaryOperator;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatCode;
 
 @JsonTest
-public class __BaseTypeTest<TYPE extends __BaseType> {
+public abstract class __BaseTypeTest<TYPE extends __BaseType> {
 
     protected __BaseTypeTest(final Class<TYPE> typeClass) {
         super();
         this.typeClass = Objects.requireNonNull(typeClass, "typeClass is null");
+    }
+
+    // -----------------------------------------------------------------------------------------------------------------
+    @Test
+    void accessors__() throws IntrospectionException, InvocationTargetException, IllegalAccessException {
+        final var instance = newTypeInstance();
+        for (Class<?> c = typeClass; c != null; c = c.getSuperclass()) {
+            final var info = Introspector.getBeanInfo(c);
+            for (final var descriptor : info.getPropertyDescriptors()) {
+                final var reader = descriptor.getReadMethod();
+                if (reader == null) {
+                    continue;
+                }
+                if (!reader.canAccess(instance)) {
+                    reader.setAccessible(true);
+                }
+                final Object value = reader.invoke(instance);
+                final var writer = descriptor.getWriteMethod();
+                if (writer == null) {
+                    continue;
+                }
+                if (!writer.canAccess(instance)) {
+                    writer.setAccessible(true);
+                }
+                assertThatCode(() -> {
+                    writer.invoke(instance, value);
+                }).doesNotThrowAnyException();
+            }
+        }
     }
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -50,7 +84,7 @@ public class __BaseTypeTest<TYPE extends __BaseType> {
                 name,
                 r -> {
                     try {
-                        final TYPE value = newObjectMapper().reader().readValue(r, typeClass);
+                        final TYPE value = objectMapper().reader().readValue(r, typeClass);
                         return function.apply(value);
                     } catch (final IOException e) {
                         throw new UncheckedIOException(e);
@@ -61,10 +95,6 @@ public class __BaseTypeTest<TYPE extends __BaseType> {
 
     protected TYPE deserializeResource(final String name) throws IOException {
         return deserializeResource(name, Function.identity());
-    }
-
-    protected ObjectMapper newObjectMapper() {
-        return new ObjectMapper(jsonFactory());
     }
 
     // ------------------------------------------------------------------------------------------------------- typeClass
@@ -93,17 +123,31 @@ public class __BaseTypeTest<TYPE extends __BaseType> {
 
     // ----------------------------------------------------------------------------------------------------- jsonFactory
     protected JsonFactory jsonFactory() {
-        if (jsonFactory == null) {
-            jsonFactory = new JsonFactoryBuilder().build();
+        var result = jsonFactory;
+        if (result == null) {
+            result = jsonFactory = new JsonFactoryBuilder().build();
         }
-        return jsonFactory;
+        return result;
+    }
+
+    // ---------------------------------------------------------------------------------------------------- objectMapper
+    protected ObjectMapper objectMapper() {
+        var result = objectMapper;
+        if (result == null) {
+            result = objectMapper = new ObjectMapper(jsonFactory());
+        }
+        return result;
     }
 
     // -----------------------------------------------------------------------------------------------------------------
     protected final Class<TYPE> typeClass;
 
+    // -----------------------------------------------------------------------------------------------------------------
     private JsonFactory jsonFactory;
 
+    private ObjectMapper objectMapper;
+
+    // -----------------------------------------------------------------------------------------------------------------
     @Autowired
     @Accessors(fluent = true)
     @Getter(AccessLevel.PROTECTED)
