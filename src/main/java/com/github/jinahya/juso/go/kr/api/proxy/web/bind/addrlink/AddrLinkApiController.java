@@ -7,6 +7,7 @@ import com.github.jinahya.juso.go.kr.api.proxy.web.bind._type.util.KeywordUtils;
 import com.github.jinahya.juso.go.kr.api.proxy.web.bind._type.util.SqlReservedWords;
 import com.github.jinahya.juso.go.kr.api.proxy.web.bind.addrlink._type.AddrLinkApiRequest;
 import com.github.jinahya.juso.go.kr.api.proxy.web.bind.addrlink._type.AddrLinkApiResponse;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotNull;
@@ -64,6 +65,7 @@ class AddrLinkApiController
     }
 
     // -----------------------------------------------------------------------------------------------------------------
+    @Operation(summary = "주소 검색", description = "주소를 검색한다.")
     @GetMapping(
             produces = {
                     MediaType.APPLICATION_JSON_VALUE
