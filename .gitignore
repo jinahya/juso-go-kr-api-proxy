@@ -33,7 +33,9 @@ gradle-app.setting
 # End of https://www.toptal.com/developers/gitignore/api/gradle
 
 
-*iml
+*.iml
+*.ipr
+*.iws
 .idea
 !.idea/codeStyles
 
