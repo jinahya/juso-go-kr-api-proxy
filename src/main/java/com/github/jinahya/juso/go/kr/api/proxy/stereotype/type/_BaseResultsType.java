@@ -1,6 +1,7 @@
 package com.github.jinahya.juso.go.kr.api.proxy.stereotype.type;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.PositiveOrZero;
@@ -52,24 +53,31 @@ public class _BaseResultsType<DATA>
         // ------------------------------------------------------------------------------------------------ errorMessage
 
         // -------------------------------------------------------------------------------------------------------------
+        @Schema(description = "총 검색 데이터수")
         @PositiveOrZero
         @NotNull
         private Integer totalCount;
 
+        @Schema(description = "페이지 번호")
         @Positive
 //        @NotNull
         @Nullable
         @jakarta.annotation.Nullable
         private Integer currentPage;
 
+        @Schema(description = "페이지당 출력할 결과 Row수")
         @Positive
 //        @NotNull
         @Nullable
         @jakarta.annotation.Nullable
         private Integer countPerPage;
 
+        @Schema(description = "에러 코드")
+        @NotNull
         private String errorCode;
 
+        @Schema(description = "에러 메시지")
+        @NotNull
         private String errorMessage;
     }
 
