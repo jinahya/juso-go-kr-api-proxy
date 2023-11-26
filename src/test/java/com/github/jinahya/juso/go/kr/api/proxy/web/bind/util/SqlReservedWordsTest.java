@@ -1,6 +1,5 @@
 package com.github.jinahya.juso.go.kr.api.proxy.web.bind.util;
 
-import com.github.jinahya.juso.go.kr.api.proxy.web.bind.util.SqlReservedWords;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;

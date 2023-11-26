@@ -2,9 +2,9 @@ package com.github.jinahya.juso.go.kr.api.proxy.stereotype.type.addrlink;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.github.jinahya.juso.go.kr.api.proxy.stereotype.type._PropertyEnum;
 import com.github.jinahya.juso.go.kr.api.proxy.stereotype.type.__BaseTypeConstants;
 import com.github.jinahya.juso.go.kr.api.proxy.stereotype.type.__BaseTypeGroup;
-import com.github.jinahya.juso.go.kr.api.proxy.stereotype.type._PropertyEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;

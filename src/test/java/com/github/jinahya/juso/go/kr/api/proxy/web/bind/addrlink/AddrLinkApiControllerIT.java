@@ -1,6 +1,5 @@
 package com.github.jinahya.juso.go.kr.api.proxy.web.bind.addrlink;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.github.jinahya.juso.go.kr.api.proxy.stereotype.type._BaseResultsType;
 import com.github.jinahya.juso.go.kr.api.proxy.stereotype.type.addrlink.AddrLinkApiRequest;
 import com.github.jinahya.juso.go.kr.api.proxy.stereotype.type.addrlink.AddrLinkApiResponse;
@@ -79,7 +78,7 @@ class AddrLinkApiControllerIT
             "청와대"
     })
     @ParameterizedTest
-    void post__(final String keyword) throws JsonProcessingException {
+    void post__(final String keyword) {
         final var request = new AddrLinkApiRequest();
         request.setKeyword(keyword);
         request.setCountPerPage(10);

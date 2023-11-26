@@ -15,8 +15,6 @@ import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 
 import java.util.Objects;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 @SpringBootTest
 public abstract class _BaseServiceIT<SERVICE extends _BaseService>
         extends __BaseServiceTestBase<SERVICE> {

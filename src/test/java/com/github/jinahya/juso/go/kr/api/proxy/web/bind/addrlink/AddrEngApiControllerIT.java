@@ -11,7 +11,6 @@ import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.BodyInserters;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.setMaxElementsForPrinting;
 
 @Slf4j
 class AddrEngApiControllerIT

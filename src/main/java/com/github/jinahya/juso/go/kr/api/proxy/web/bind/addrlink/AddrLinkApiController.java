@@ -4,9 +4,9 @@ import com.github.jinahya.juso.go.kr.api.proxy.context.properties.AddrLinkApiCon
 import com.github.jinahya.juso.go.kr.api.proxy.stereotype.AddrLinkService;
 import com.github.jinahya.juso.go.kr.api.proxy.stereotype.type.addrlink.AddrLinkApiRequest;
 import com.github.jinahya.juso.go.kr.api.proxy.stereotype.type.addrlink.AddrLinkApiResponse;
+import com.github.jinahya.juso.go.kr.api.proxy.web.bind.WebBindConstants;
 import com.github.jinahya.juso.go.kr.api.proxy.web.bind.util.KeywordUtils;
 import com.github.jinahya.juso.go.kr.api.proxy.web.bind.util.SqlReservedWords;
-import com.github.jinahya.juso.go.kr.api.proxy.web.bind.WebBindConstants;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Max;
