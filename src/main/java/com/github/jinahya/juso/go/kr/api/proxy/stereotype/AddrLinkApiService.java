@@ -1,6 +1,7 @@
 package com.github.jinahya.juso.go.kr.api.proxy.stereotype;
 
 import com.github.jinahya.juso.go.kr.api.proxy.context.AddrLinkApiConfiguration;
+import com.github.jinahya.juso.go.kr.api.proxy.context.properties.AddrLinkApiConfigurationProperties;
 import com.github.jinahya.juso.go.kr.api.proxy.stereotype.type.__BaseTypeGroup;
 import com.github.jinahya.juso.go.kr.api.proxy.stereotype.type.addrlink.AddrLinkApiRequest;
 import com.github.jinahya.juso.go.kr.api.proxy.stereotype.type.addrlink.AddrLinkApiResponse;
@@ -21,10 +22,10 @@ import reactor.core.publisher.Mono;
 @ToString
 @NoArgsConstructor(access = AccessLevel.PACKAGE)
 @Slf4j
-public class AddrLinkService
+public class AddrLinkApiService
         extends _BaseService {
 
-    public static final String CACHE_NAME_ADDR_LINK = "addrLink";
+    public static final String CACHE_NAME_ADDR_LINK = AddrLinkApiConfigurationProperties.BASE_URL;
 
     // -----------------------------------------------------------------------------------------------------------------
 //    @Cacheable(cacheNames = {CACHE_NAME_ADDR_LINK})

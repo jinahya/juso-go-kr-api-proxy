@@ -1,9 +1,9 @@
 package com.github.jinahya.juso.go.kr.api.proxy.stereotype;
 
-import com.github.jinahya.juso.go.kr.api.proxy.context.AddrLinkApiConfiguration;
-import com.github.jinahya.juso.go.kr.api.proxy.context.properties.AddrLinkApiConfigurationProperties;
+import com.github.jinahya.juso.go.kr.api.proxy.context.AddrEngApiConfiguration;
+import com.github.jinahya.juso.go.kr.api.proxy.context.properties.AddrEngApiConfigurationProperties;
 import com.github.jinahya.juso.go.kr.api.proxy.stereotype.type._BaseResultsType;
-import com.github.jinahya.juso.go.kr.api.proxy.stereotype.type.addrlink.AddrLinkApiRequest;
+import com.github.jinahya.juso.go.kr.api.proxy.stereotype.type.addrlink.AddrEngApiRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -16,19 +16,20 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @ContextConfiguration(
         classes = {
-                AddrLinkService.class,
-                AddrLinkApiConfiguration.class,
-                AddrLinkApiConfigurationProperties.class,
+                AddrEngApiService.class,
+//                CacheConfiguration.class,
+                AddrEngApiConfiguration.class,
+                AddrEngApiConfigurationProperties.class,
                 JacksonAutoConfiguration.class,
                 ValidationAutoConfiguration.class
         }
 )
 @Slf4j
-class AddrLinkServiceIT
-        extends _BaseServiceIT<AddrLinkService> {
+class AddrEngApiServiceIT
+        extends _BaseServiceIT<AddrEngApiService> {
 
-    AddrLinkServiceIT() {
-        super(AddrLinkService.class);
+    AddrEngApiServiceIT() {
+        super(AddrEngApiService.class);
     }
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -38,14 +39,15 @@ class AddrLinkServiceIT
     })
     @ParameterizedTest
     void retrieve__(final String keyword) {
-        final var request = new AddrLinkApiRequest();
-        request.setConfmKey(properties.getConfmKey());
-        request.setKeyword(keyword);
-        request.setResultType("json");
-        request.setCountPerPage(10);
+        final var request = AddrEngApiRequest.builder()
+                .confmKey(properties.getConfmKey())
+                .keyword(keyword)
+                .resultType("json")
+                .countPerPage(10)
+                .build();
         for (var currentPage = 1; ; currentPage++) {
             request.setCurrentPage(currentPage);
-            log.debug("request: {}", request);
+            log.debug("reqeust: {}", request);
             printPretty(request);
             // ---------------------------------------------------------------------------------------------------- when
             final var response = serviceInstance().retrieve(request).block();
@@ -66,8 +68,7 @@ class AddrLinkServiceIT
                 assertThat(c.getUnknownProperties()).isEmpty();
             });
             final var juso = results.getJuso();
-            assertThat(juso).isNotNull().allSatisfy(j -> {
-                assertThat(j).isNotNull();
+            assertThat(juso).isNotNull().doesNotContainNull().allSatisfy(j -> {
                 assertThat(j.getUnknownProperties()).isEmpty();
             });
             assertValid(response);
@@ -87,5 +88,5 @@ class AddrLinkServiceIT
 
     // -----------------------------------------------------------------------------------------------------------------
     @Autowired
-    private AddrLinkApiConfigurationProperties properties;
+    private AddrEngApiConfigurationProperties properties;
 }

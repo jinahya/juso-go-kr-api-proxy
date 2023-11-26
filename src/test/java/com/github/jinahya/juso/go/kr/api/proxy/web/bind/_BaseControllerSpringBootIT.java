@@ -24,10 +24,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 // https://docs.spring.io/spring-framework/reference/testing/webtestclient.html
 @SpringBootTest
 @Slf4j
-public abstract class _BaseControllerIT<CONTROLLER extends _BaseController>
+public abstract class _BaseControllerSpringBootIT<CONTROLLER extends _BaseController>
         extends __BaseControllerTestBase<CONTROLLER> {
 
-    protected _BaseControllerIT(final Class<CONTROLLER> controllerClass) {
+    protected _BaseControllerSpringBootIT(final Class<CONTROLLER> controllerClass) {
         super(controllerClass);
     }
 

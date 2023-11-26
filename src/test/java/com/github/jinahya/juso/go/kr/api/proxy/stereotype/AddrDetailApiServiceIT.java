@@ -16,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @ContextConfiguration(
         classes = {
-                AddrDetailService.class,
+                AddrDetailApiService.class,
                 AddrDetailApiConfiguration.class,
                 AddrDetailApiConfigurationProperties.class,
                 JacksonAutoConfiguration.class,
@@ -24,11 +24,11 @@ import static org.assertj.core.api.Assertions.assertThat;
         }
 )
 @Slf4j
-class AddrDetailServiceIT
-        extends _BaseServiceIT<AddrDetailService> {
+class AddrDetailApiServiceIT
+        extends _BaseServiceIT<AddrDetailApiService> {
 
-    AddrDetailServiceIT() {
-        super(AddrDetailService.class);
+    AddrDetailApiServiceIT() {
+        super(AddrDetailApiService.class);
     }
 
     // -----------------------------------------------------------------------------------------------------------------

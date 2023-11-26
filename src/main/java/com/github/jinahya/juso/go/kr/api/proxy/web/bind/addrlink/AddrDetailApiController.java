@@ -1,7 +1,7 @@
 package com.github.jinahya.juso.go.kr.api.proxy.web.bind.addrlink;
 
 import com.github.jinahya.juso.go.kr.api.proxy.context.properties.AddrDetailApiConfigurationProperties;
-import com.github.jinahya.juso.go.kr.api.proxy.stereotype.AddrDetailService;
+import com.github.jinahya.juso.go.kr.api.proxy.stereotype.AddrDetailApiService;
 import com.github.jinahya.juso.go.kr.api.proxy.stereotype.type.addrlink.AddrDetailApiRequest;
 import com.github.jinahya.juso.go.kr.api.proxy.stereotype.type.addrlink.AddrDetailApiResponse;
 import jakarta.validation.Valid;
@@ -77,5 +77,5 @@ class AddrDetailApiController
     // -----------------------------------------------------------------------------------------------------------------
     private final AddrDetailApiConfigurationProperties properties;
 
-    private final AddrDetailService service;
+    private final AddrDetailApiService service;
 }

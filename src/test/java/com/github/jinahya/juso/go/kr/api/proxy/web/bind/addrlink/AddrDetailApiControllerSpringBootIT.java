@@ -11,11 +11,11 @@ import org.springframework.web.reactive.function.BodyInserters;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Slf4j
-class AddrDetailApiControllerIT
-        extends _AddrlinkControllerIT<AddrDetailApiController> {
+class AddrDetailApiControllerSpringBootIT
+        extends _AddrlinkControllerSpringBootIT<AddrDetailApiController> {
 
     // -----------------------------------------------------------------------------------------------------------------
-    AddrDetailApiControllerIT() {
+    AddrDetailApiControllerSpringBootIT() {
         super(AddrDetailApiController.class);
     }
 

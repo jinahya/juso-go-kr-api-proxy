@@ -1,11 +1,11 @@
 package com.github.jinahya.juso.go.kr.api.proxy.web.bind.addrlink;
 
 import com.github.jinahya.juso.go.kr.api.proxy.context.properties.AddrEngApiConfigurationProperties;
-import com.github.jinahya.juso.go.kr.api.proxy.stereotype.AddrEngService;
+import com.github.jinahya.juso.go.kr.api.proxy.stereotype.AddrEngApiService;
 import com.github.jinahya.juso.go.kr.api.proxy.stereotype.type.addrlink.AddrEngApiRequest;
 import com.github.jinahya.juso.go.kr.api.proxy.stereotype.type.addrlink.AddrEngApiResponse;
+import com.github.jinahya.juso.go.kr.api.proxy.util.KeywordUtils;
 import com.github.jinahya.juso.go.kr.api.proxy.web.bind.WebBindConstants;
-import com.github.jinahya.juso.go.kr.api.proxy.web.bind.util.KeywordUtils;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotNull;
@@ -103,5 +103,5 @@ class AddrEngApiController
     // -----------------------------------------------------------------------------------------------------------------
     private final AddrEngApiConfigurationProperties properties;
 
-    private final AddrEngService service;
+    private final AddrEngApiService service;
 }

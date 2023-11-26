@@ -1,12 +1,11 @@
 package com.github.jinahya.juso.go.kr.api.proxy.stereotype;
 
-import com.github.jinahya.juso.go.kr.api.proxy.context.AddrEngApiConfiguration;
-import com.github.jinahya.juso.go.kr.api.proxy.context.properties.AddrEngApiConfigurationProperties;
+import com.github.jinahya.juso.go.kr.api.proxy.context.AddrDetailApiConfiguration;
+import com.github.jinahya.juso.go.kr.api.proxy.context.properties.AddrDetailApiConfigurationProperties;
 import com.github.jinahya.juso.go.kr.api.proxy.stereotype.type.__BaseTypeGroup;
-import com.github.jinahya.juso.go.kr.api.proxy.stereotype.type.addrlink.AddrEngApiRequest;
-import com.github.jinahya.juso.go.kr.api.proxy.stereotype.type.addrlink.AddrEngApiResponse;
+import com.github.jinahya.juso.go.kr.api.proxy.stereotype.type.addrlink.AddrDetailApiRequest;
+import com.github.jinahya.juso.go.kr.api.proxy.stereotype.type.addrlink.AddrDetailApiResponse;
 import jakarta.validation.Valid;
-import jakarta.validation.Validator;
 import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
@@ -24,29 +23,29 @@ import reactor.core.publisher.Mono;
 @ToString
 @NoArgsConstructor(access = AccessLevel.PACKAGE)
 @Slf4j
-public class AddrEngService
+public class AddrDetailApiService
         extends _BaseService {
 
-    public static final String CACHE_NAME_ADDR_ENG = AddrEngApiConfigurationProperties.BASE_URL;
+    public static final String CACHE_NAME_ADDR_DETAIL = AddrDetailApiConfigurationProperties.BASE_URL;
 
     // -----------------------------------------------------------------------------------------------------------------
-    @Cacheable(cacheNames = {CACHE_NAME_ADDR_ENG})
+    @Cacheable(cacheNames = {CACHE_NAME_ADDR_DETAIL})
     @Validated({__BaseTypeGroup.class})
-    public Mono<AddrEngApiResponse> retrieve(@Valid @NotNull final AddrEngApiRequest request) {
+    public Mono<AddrDetailApiResponse> retrieve(@Valid @NotNull final AddrDetailApiRequest request) {
         return webClient
                 .get()
-                .uri(b -> request.put(b).build())
+                .uri(b -> {
+                    final var built = b.queryParams(request.toMultivalueMap(objectMapper())).build();
+                    log.debug("built: {}", built);
+                    return built;
+                })
                 .retrieve()
-                .bodyToMono(AddrEngApiResponse.class);
+                .bodyToMono(AddrDetailApiResponse.class);
     }
 
     // -----------------------------------------------------------------------------------------------------------------
-    @AddrEngApiConfiguration.AddrEngApi
+    @AddrDetailApiConfiguration.AddrDetailApi
     @Autowired
     @SuppressWarnings({"java:S6813"})
     private WebClient webClient;
-
-    @Autowired
-    @SuppressWarnings({"java:S6813"})
-    private Validator validator;
 }

@@ -1,4 +1,4 @@
-package com.github.jinahya.juso.go.kr.api.proxy.web.bind.util;
+package com.github.jinahya.juso.go.kr.api.proxy.util;
 
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Nested;

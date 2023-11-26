@@ -1,4 +1,4 @@
-package com.github.jinahya.juso.go.kr.api.proxy.web.bind.util;
+package com.github.jinahya.juso.go.kr.api.proxy.util;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 // https://en.wikipedia.org/wiki/List_of_SQL_reserved_words
-public final class SqlReservedWords {
+final class SqlReservedWords {
 
     private static final String NAME = "sql-reserved-words.txt";
 
@@ -51,26 +51,12 @@ public final class SqlReservedWords {
             Pattern.CASE_INSENSITIVE
     );
 
-    public static String removeAllSqlReservedWords(final String string) {
+    static String removeAllSqlReservedWords(final String string) {
         Objects.requireNonNull(string, "string is null");
-        if (true) {
-            return PATTERN.matcher(string).replaceAll("");
-        }
-        final var builder = new StringBuilder(string);
-        int index;
-        for (final String word : getSqlReservedWords()) {
-            index = builder.indexOf(word.toUpperCase());
-            if (index != -1) {
-                builder.delete(index, index + word.length());
-            }
-            index = builder.indexOf(word.toLowerCase());
-            if (index != -1) {
-                builder.delete(index, index + word.length());
-            }
-        }
-        return builder.toString();
+        return PATTERN.matcher(string).replaceAll("");
     }
 
+    // -----------------------------------------------------------------------------------------------------------------
     private SqlReservedWords() {
         throw new AssertionError("instantiation is not allowed");
     }

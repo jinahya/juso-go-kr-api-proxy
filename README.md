@@ -1,13 +1,16 @@
 # juso-go-kr-api-proxy
 
-An application for proxying APIs from https://business.juso.go.kr.
+[주소기반산업지원서비스](https://business.juso.go.kr) 에서 제공하는 API 를 proxy 하기 위한 ~~application~~library 입니다.
+
+## How to build and test
+
+Copy `src/test/resources/application-private-template.yaml` into `application-private.yaml` file, which is listed in the `.gitignore` file, in the same directory, and put required values. See below for an example.
 
 ## How to extend
 
 ### `@SpringBootApplication` class
 
-Add your own `@SpringBootApplication` class with an additional component scanning
-path. (`com.github.jinahya.juso.go.kr.api.proxy._NoOp.class` might help.)
+Add your own `@SpringBootApplication` class with an additional component scanning path. (`com.github.jinahya.juso.go.kr.api.proxy._NoOp.class` might help.)
 
 ```java
 package whatever;
@@ -18,7 +21,7 @@ package whatever;
                 com.github.jinahya.juso.go.kr.api.proxy._NoOp.class
         }
 )
-public class Application {
+class Application {
 
     public static void main(final String... args) {
         SpringApplication.run(Application.class, args);
@@ -30,10 +33,11 @@ public class Application {
 
 Provide required application properties.
 
-| name                                          | value | description      | notes |
-|-----------------------------------------------|-------|------------------|-------|
-| `juso-go-kr.addrlink.addr-link-api.confm-key` |       | 검색 API key       |       |
-| `juso-go-kr.addrlink.addr-eng-api.confm-key`  |       | 영문 주소 검색 API key |       |
+| name                                            | value | description     | notes |
+|-------------------------------------------------|-------|-----------------|-------|
+| `juso-go-kr.addrlink.addr-link-api.confm-key`   |       | 도로명주소 API key   |       |
+| `juso-go-kr.addrlink.addr-eng-api.confm-key`    |       | 영문주소 검색 API key |       |
+| `juso-go-kr.addrlink.addr-detail-api.confm-key` |       | 상세주소 API key    |       |
 
 e.g.
 
@@ -41,11 +45,14 @@ e.g.
 juso-go-kr:
   addrlink:
     addr-link-api:
-      confm-key: devU01TX0FVVEgyMDIzMTEwNDEzNTEzNjExNDI0MTQ=
-      wiretap-http-client: true
+      confm-key: dev...=
+      wiretap-http-client: true # debugging purpose only
     addr-eng-api:
-      confm-key: devU01TX0FVVEgyMDIzMTEwNDE0NDUwODExNDI0MTU=
-      wiretap-http-client: true
+      confm-key: dev...=
+      wiretap-http-client: true # debugging purpose only
+    addr-detail-api:
+      confm-key: dev...=
+      wiretap-http-client: true # debugging purpose only
 ```
 
 ## Links

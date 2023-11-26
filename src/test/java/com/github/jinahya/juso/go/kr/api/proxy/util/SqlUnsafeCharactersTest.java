@@ -1,4 +1,4 @@
-package com.github.jinahya.juso.go.kr.api.proxy.web.bind.util;
+package com.github.jinahya.juso.go.kr.api.proxy.util;
 
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Nested;
@@ -8,7 +8,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Slf4j
-class KeywordUtilsTest {
+class SqlUnsafeCharactersTest {
 
     @Nested
     class ReplaceUnsafeCharactersTest {
@@ -23,8 +23,8 @@ class KeywordUtilsTest {
         })
         @ParameterizedTest
         void __(final String keyword) {
-            final var replaced = KeywordUtils.removeUnsafeCharacters(keyword);
-            assertThat(KeywordUtils.containsAnyUnsafeCharacter(replaced)).isFalse();
+            final var replaced = SqlUnsafeCharacters.removeUnsafeCharacters(keyword);
+            assertThat(SqlUnsafeCharacters.containsAnyUnsafeCharacter(replaced)).isFalse();
         }
     }
 }
