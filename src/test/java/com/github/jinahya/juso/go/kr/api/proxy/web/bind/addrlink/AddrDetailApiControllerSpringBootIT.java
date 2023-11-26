@@ -117,9 +117,12 @@ class AddrDetailApiControllerSpringBootIT
             assertThat(c.getUnknownProperties()).isEmpty();
         });
         final var juso = results.getJuso();
-        assertThat(juso).isNotNull().allSatisfy(j -> {
-            assertThat(j).isNotNull();
-            assertThat(j.getUnknownProperties()).isEmpty();
-        });
+        assertThat(juso)
+                .isNotNull()
+                .isNotEmpty()
+                .allSatisfy(j -> {
+                    assertThat(j).isNotNull();
+                    assertThat(j.getUnknownProperties()).isEmpty();
+                });
     }
 }

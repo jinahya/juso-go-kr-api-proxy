@@ -1,10 +1,12 @@
 package com.github.jinahya.juso.go.kr.api.proxy.stereotype;
 
-import com.github.jinahya.juso.go.kr.api.proxy.context.AddrDetailApiConfiguration;
-import com.github.jinahya.juso.go.kr.api.proxy.context.properties.AddrDetailApiConfigurationProperties;
+import com.github.jinahya.juso.go.kr.api.proxy.context.AddrCoordApiConfiguration;
+import com.github.jinahya.juso.go.kr.api.proxy.context.properties.AddrCoordApiConfigurationProperties;
 import com.github.jinahya.juso.go.kr.api.proxy.stereotype.type._BaseResultsType;
-import com.github.jinahya.juso.go.kr.api.proxy.stereotype.type.addrlink.AddrDetailApiRequest;
+import com.github.jinahya.juso.go.kr.api.proxy.stereotype.type.__BaseTypeConstants;
+import com.github.jinahya.juso.go.kr.api.proxy.stereotype.type.addrlink.AddrCoordApiRequest;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration;
@@ -13,37 +15,36 @@ import org.springframework.test.context.ContextConfiguration;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Disabled
 @ContextConfiguration(
         classes = {
-                AddrDetailApiService.class,
-                AddrDetailApiConfiguration.class,
-                AddrDetailApiConfigurationProperties.class,
+                AddrCoordApiService.class,
+                AddrCoordApiConfiguration.class,
+                AddrCoordApiConfigurationProperties.class,
                 JacksonAutoConfiguration.class,
                 ValidationAutoConfiguration.class
         }
 )
 @Slf4j
-class AddrDetailApiServiceIT
-        extends _BaseServiceIT<AddrDetailApiService> {
+class AddrCoordApiServiceIT
+        extends _BaseServiceIT<AddrCoordApiService> {
 
-    AddrDetailApiServiceIT() {
-        super(AddrDetailApiService.class);
+    AddrCoordApiServiceIT() {
+        super(AddrCoordApiService.class);
     }
 
     // -----------------------------------------------------------------------------------------------------------------
     @Test
     void retrieve__() {
         // ------------------------------------------------------------------------------------------------------- given
-        final var request = AddrDetailApiRequest.builder()
+        final var request = AddrCoordApiRequest.builder()
                 .confmKey(properties.getConfmKey())
                 .admCd("1135010200")
                 .rnMgtSn("113503109006")
                 .udrtYn("0")
                 .buldMnnm(111)
                 .buldSlno(0)
-//                .searchType(AddrDetailApiRequest.PROPERTY_VALUE_SEARCH_TYPE_DONG)
-//                .dongNm("17동")
-                .resultType(AddrDetailApiRequest.PROPERTY_VALUE_RESULT_TYPE_JSON)
+                .resultType(__BaseTypeConstants.PROPERTY_VALUE_RESULT_TYPE_JSON)
                 .build();
         log.debug("request: {}", request);
         printPretty(request);
@@ -84,5 +85,5 @@ class AddrDetailApiServiceIT
 
     // ------------------------------------------------------------------------------------------------------ properties
     @Autowired
-    private AddrDetailApiConfigurationProperties properties;
+    private AddrCoordApiConfigurationProperties properties;
 }

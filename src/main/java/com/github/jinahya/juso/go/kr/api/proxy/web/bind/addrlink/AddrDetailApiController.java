@@ -54,9 +54,7 @@ class AddrDetailApiController
         bindingResult.getAllErrors().forEach(e -> {
             log.error("binding error: {}", e);
         });
-        return service.retrieve(
-                set(request)
-        );
+        return post(exchange, request);
     }
 
     @PostMapping(

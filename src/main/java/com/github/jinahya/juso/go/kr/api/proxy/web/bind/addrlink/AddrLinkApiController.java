@@ -29,6 +29,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
+import java.util.Objects;
+
 @Validated
 @RestController
 @RequestMapping(
@@ -45,6 +47,7 @@ class AddrLinkApiController
 
     // -----------------------------------------------------------------------------------------------------------------
     private void set(final AddrLinkApiRequest request, final Integer page, final Integer size) {
+        Objects.requireNonNull(request, "request is null");
         if (request.getConfmKey() == null) {
             request.setConfmKey(properties.getConfmKey());
         }
@@ -77,8 +80,7 @@ class AddrLinkApiController
         bindingResult.getAllErrors().stream().forEach(e -> {
             log.error("binding error: {}", e);
         });
-        set(request, page, size);
-        return service.retrieve(request);
+        return post(exchange, request, page, size);
     }
 
     @PostMapping(
