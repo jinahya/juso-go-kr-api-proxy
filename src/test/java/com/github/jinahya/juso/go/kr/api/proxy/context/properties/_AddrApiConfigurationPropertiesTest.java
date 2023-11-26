@@ -1,36 +1,41 @@
 package com.github.jinahya.juso.go.kr.api.proxy.context.properties;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.ReflectionUtils;
 
-import java.util.Objects;
-
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.spy;
 
 @Slf4j
-abstract class _AddrApiConfigurationPropertiesTest<PROPERTIES extends _AddrApiConfigurationProperties> {
+abstract class _AddrApiConfigurationPropertiesTest<PROPERTIES extends _AddrApiConfigurationProperties>
+        extends __AddrApiConfigurationPropertiesTestBase<PROPERTIES> {
 
     _AddrApiConfigurationPropertiesTest(final Class<PROPERTIES> propertiesClass) {
-        super();
-        this.propertiesClass = Objects.requireNonNull(propertiesClass, "propertiesClass is null");
+        super(propertiesClass);
     }
 
-    // -----------------------------------------------------------------------------------------------------------------
-    @Test
-    void newHttpClient_NotNull_() {
-        final var httpClient = propertiesInstance.newHttpClient();
-        assertThat(httpClient).isNotNull();
+    // ------------------------------------------------------------------------------------------------- propertiesClass
+
+    /**
+     * Returns a new {@link org.mockito.Mockito#spy(Object) spy} instance of {@link #propertiesClass}.
+     *
+     * @return a new {@link org.mockito.Mockito#spy(Object) spy} instance of {@link #propertiesClass}.
+     */
+    PROPERTIES newPropertiesSpy() {
+        return spy(newPropertiesInstance());
     }
 
-    // -----------------------------------------------------------------------------------------------------------------
-    protected Class<PROPERTIES> propertiesClass;
-
-    @Autowired
-    @Accessors(fluent = true)
-    @Getter(AccessLevel.PACKAGE)
-    private PROPERTIES propertiesInstance;
+    /**
+     * Returns a new instance of {@link #propertiesClass}.
+     *
+     * @return a new instance of {@link #propertiesClass}.
+     */
+    PROPERTIES newPropertiesInstance() {
+        try {
+            return ReflectionUtils
+                    .accessibleConstructor(propertiesClass)
+                    .newInstance();
+        } catch (final ReflectiveOperationException roe) {
+            throw new RuntimeException("failed to instantiate " + propertiesClass, roe);
+        }
+    }
 }

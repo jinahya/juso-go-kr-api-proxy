@@ -1,0 +1,147 @@
+{
+  "results": {
+    "common": {
+      "totalCount": "17",
+      "errorCode": "0",
+      "errorMessage": "정상"
+    },
+    "juso": [
+      {
+        "admCd": "1135010200",
+        "rnMgtSn": "113503109006",
+        "udrtYn": "0",
+        "buldMnnm": "111",
+        "buldSlno": "0",
+        "dongNm": "17동"
+      },
+      {
+        "admCd": "1135010200",
+        "rnMgtSn": "113503109006",
+        "udrtYn": "0",
+        "buldMnnm": "111",
+        "buldSlno": "0",
+        "dongNm": "18동"
+      },
+      {
+        "admCd": "1135010200",
+        "rnMgtSn": "113503109006",
+        "udrtYn": "0",
+        "buldMnnm": "111",
+        "buldSlno": "0",
+        "dongNm": "19동"
+      },
+      {
+        "admCd": "1135010200",
+        "rnMgtSn": "113503109006",
+        "udrtYn": "0",
+        "buldMnnm": "111",
+        "buldSlno": "0",
+        "dongNm": "20동"
+      },
+      {
+        "admCd": "1135010200",
+        "rnMgtSn": "113503109006",
+        "udrtYn": "0",
+        "buldMnnm": "111",
+        "buldSlno": "0",
+        "dongNm": "21동"
+      },
+      {
+        "admCd": "1135010200",
+        "rnMgtSn": "113503109006",
+        "udrtYn": "0",
+        "buldMnnm": "111",
+        "buldSlno": "0",
+        "dongNm": "22동"
+      },
+      {
+        "admCd": "1135010200",
+        "rnMgtSn": "113503109006",
+        "udrtYn": "0",
+        "buldMnnm": "111",
+        "buldSlno": "0",
+        "dongNm": "23동"
+      },
+      {
+        "admCd": "1135010200",
+        "rnMgtSn": "113503109006",
+        "udrtYn": "0",
+        "buldMnnm": "111",
+        "buldSlno": "0",
+        "dongNm": "24동"
+      },
+      {
+        "admCd": "1135010200",
+        "rnMgtSn": "113503109006",
+        "udrtYn": "0",
+        "buldMnnm": "111",
+        "buldSlno": "0",
+        "dongNm": "25동"
+      },
+      {
+        "admCd": "1135010200",
+        "rnMgtSn": "113503109006",
+        "udrtYn": "0",
+        "buldMnnm": "111",
+        "buldSlno": "0",
+        "dongNm": "26동"
+      },
+      {
+        "admCd": "1135010200",
+        "rnMgtSn": "113503109006",
+        "udrtYn": "0",
+        "buldMnnm": "111",
+        "buldSlno": "0",
+        "dongNm": "27동"
+      },
+      {
+        "admCd": "1135010200",
+        "rnMgtSn": "113503109006",
+        "udrtYn": "0",
+        "buldMnnm": "111",
+        "buldSlno": "0",
+        "dongNm": "28동"
+      },
+      {
+        "admCd": "1135010200",
+        "rnMgtSn": "113503109006",
+        "udrtYn": "0",
+        "buldMnnm": "111",
+        "buldSlno": "0",
+        "dongNm": "29동"
+      },
+      {
+        "admCd": "1135010200",
+        "rnMgtSn": "113503109006",
+        "udrtYn": "0",
+        "buldMnnm": "111",
+        "buldSlno": "0",
+        "dongNm": "30동"
+      },
+      {
+        "admCd": "1135010200",
+        "rnMgtSn": "113503109006",
+        "udrtYn": "0",
+        "buldMnnm": "111",
+        "buldSlno": "0",
+        "dongNm": "31동"
+      },
+      {
+        "admCd": "1135010200",
+        "rnMgtSn": "113503109006",
+        "udrtYn": "0",
+        "buldMnnm": "111",
+        "buldSlno": "0",
+        "dongNm": "32동"
+      },
+      {
+        "admCd": "1135010200",
+        "rnMgtSn": "113503109006",
+        "udrtYn": "0",
+        "buldMnnm": "111",
+        "buldSlno": "0",
+        "dongNm": "나동"
+      }
+    ]
+  }
+}

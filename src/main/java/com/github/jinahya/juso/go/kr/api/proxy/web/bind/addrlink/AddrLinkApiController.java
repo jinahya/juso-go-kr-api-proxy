@@ -1,12 +1,12 @@
 package com.github.jinahya.juso.go.kr.api.proxy.web.bind.addrlink;
 
 import com.github.jinahya.juso.go.kr.api.proxy.context.properties.AddrLinkApiConfigurationProperties;
-import com.github.jinahya.juso.go.kr.api.proxy.streotype.AddrLinkService;
+import com.github.jinahya.juso.go.kr.api.proxy.stereotype.AddrLinkService;
+import com.github.jinahya.juso.go.kr.api.proxy.stereotype.type.addrlink.AddrLinkApiRequest;
+import com.github.jinahya.juso.go.kr.api.proxy.stereotype.type.addrlink.AddrLinkApiResponse;
+import com.github.jinahya.juso.go.kr.api.proxy.web.bind.util.KeywordUtils;
+import com.github.jinahya.juso.go.kr.api.proxy.web.bind.util.SqlReservedWords;
 import com.github.jinahya.juso.go.kr.api.proxy.web.bind.WebBindConstants;
-import com.github.jinahya.juso.go.kr.api.proxy.web.bind._type.util.KeywordUtils;
-import com.github.jinahya.juso.go.kr.api.proxy.web.bind._type.util.SqlReservedWords;
-import com.github.jinahya.juso.go.kr.api.proxy.web.bind.addrlink._type.AddrLinkApiRequest;
-import com.github.jinahya.juso.go.kr.api.proxy.web.bind.addrlink._type.AddrLinkApiResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Max;
@@ -84,7 +84,7 @@ class AddrLinkApiController
             log.error("binding error: {}", e);
         });
         set(request, page, size);
-        return service.get(request);
+        return service.retrieve(request);
     }
 
     @PostMapping(
@@ -104,7 +104,7 @@ class AddrLinkApiController
             @Positive
             @RequestParam(name = WebBindConstants.PARAM_NAME_SIZE, required = false) final Integer size) {
         set(request, page, size);
-        return service.get(request);
+        return service.retrieve(request);
     }
 
     // -----------------------------------------------------------------------------------------------------------------

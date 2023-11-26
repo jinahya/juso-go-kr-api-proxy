@@ -1,4 +1,4 @@
-package com.github.jinahya.juso.go.kr.api.proxy.web.bind;
+package com.github.jinahya.juso.go.kr.api.proxy.stereotype;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -9,63 +9,34 @@ import jakarta.validation.Validator;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.experimental.Accessors;
-import lombok.extern.slf4j.Slf4j;
-import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
-import org.springframework.test.web.reactive.server.WebTestClient;
 
 import java.util.Objects;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-//@AutoConfigureWebTestClient(timeout = "PT36S")
-// https://docs.spring.io/spring-framework/reference/testing/webtestclient.html
 @SpringBootTest
-@Slf4j
-public abstract class _BaseControllerIT<CONTROLLER extends _BaseController>
-        extends __BaseControllerTestBase<CONTROLLER> {
+public abstract class _BaseServiceIT<SERVICE extends _BaseService>
+        extends __BaseServiceTestBase<SERVICE> {
 
-    protected _BaseControllerIT(final Class<CONTROLLER> controllerClass) {
-        super(controllerClass);
+    protected _BaseServiceIT(final Class<SERVICE> serviceClass) {
+        super(serviceClass);
     }
 
     // -----------------------------------------------------------------------------------------------------------------
     @PostConstruct
     private void doOnPostConstruct() {
-        log.debug("controllerInstance: {}", controllerInstance);
         objectMapper = objectMapperBuilder.build();
     }
 
-    // -----------------------------------------------------------------------------------------------------------------
-    @Test
-    void controllerInstance_NotNull_() {
-        log.debug("controllerInstance: {}", controllerInstance);
-        assertThat(controllerInstance).isNotNull();
-    }
-
-    // ---------------------------------------------------------------------------------------------- controllerInstance
-
-    // --------------------------------------------------------------------------------------------------- webTestClient
-    protected WebTestClient newWebTestClient() {
-        return WebTestClient
-                .bindToController(controllerInstance)
-                .build();
-    }
-
-    protected WebTestClient webTestClient() {
-        var result = webTestClient;
-        if (result == null) {
-            result = webTestClient = newWebTestClient();
-        }
-        return result;
-    }
+    // ------------------------------------------------------------------------------------------------- serviceInstance
 
     // --------------------------------------------------------------------------------------------- objectMapperBuilder
 
     // ---------------------------------------------------------------------------------------------------- objectMapper
-    protected void printPretty(final Object value) {
+    void printPretty(final Object value) {
         Objects.requireNonNull(value, "value is null");
         try {
             final var string = JacksonTestUtils.writeValueAsPrettyString(objectMapper(), value);
@@ -76,7 +47,7 @@ public abstract class _BaseControllerIT<CONTROLLER extends _BaseController>
     }
 
     // ------------------------------------------------------------------------------------------------------- validator
-    protected void assertValid(final Object object, final Class<?>... groups) {
+    void assertValid(final Object object, final Class<?>... groups) {
         ValidationTestUtils.assertValid(validator(), object, groups);
     }
 
@@ -84,9 +55,7 @@ public abstract class _BaseControllerIT<CONTROLLER extends _BaseController>
     @Autowired
     @Accessors(fluent = true)
     @Getter(AccessLevel.PROTECTED)
-    private CONTROLLER controllerInstance;
-
-    private WebTestClient webTestClient;
+    private SERVICE serviceInstance;
 
     @Autowired
     private Jackson2ObjectMapperBuilder objectMapperBuilder;
