@@ -7,15 +7,19 @@ import com.github.jinahya.juso.go.kr.api.proxy.stereotype.type.addrlink.AddrLink
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.springframework.aop.aspectj.annotation.AnnotationAwareAspectJAutoProxyCreator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration;
 import org.springframework.boot.autoconfigure.validation.ValidationAutoConfiguration;
+import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ContextConfiguration;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Import(AnnotationAwareAspectJAutoProxyCreator.class)
 @ContextConfiguration(
         classes = {
+                AddrLinkApiServiceAspect.class,
                 AddrLinkApiService.class,
                 AddrLinkApiConfiguration.class,
                 AddrLinkApiConfigurationProperties.class,
