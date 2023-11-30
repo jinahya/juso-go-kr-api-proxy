@@ -57,7 +57,7 @@ class AddrLinkApiController
         if (request.getCountPerPage() == null) {
             request.setCountPerPage(
                     Optional.ofNullable(size)
-                            .orElse(AddrLinkApiRt pushequest.PROPERTY_DEFAULT_VALUE_COUNT_PER_PAGE)
+                            .orElse(AddrLinkApiRequest.PROPERTY_DEFAULT_VALUE_COUNT_PER_PAGE)
             );
         }
         request.setKeyword(KeywordUtils.filter(request.getKeyword()));
