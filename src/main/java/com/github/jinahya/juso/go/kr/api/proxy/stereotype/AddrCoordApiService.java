@@ -24,7 +24,7 @@ import reactor.core.publisher.Mono;
 @NoArgsConstructor(access = AccessLevel.PACKAGE)
 @Slf4j
 public class AddrCoordApiService
-        extends _BaseService {
+        extends _BaseService<AddrCoordApiRequest, AddrCoordApiResponse> {
 
     public static final String CACHE_NAME_ADDR_COORD = AddrCoordApiConfigurationProperties.BASE_URL;
 

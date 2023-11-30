@@ -10,29 +10,33 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
+import java.util.Optional;
+
 @Component
 @Aspect
 @Slf4j
 class AddrLinkApiServiceAspect {
 
     @Pointcut("execution(* " +
-              "com.github.jinahya.juso.go.kr.api.proxy.stereotype." +
-              "AddrLinkApiService" +
+              "com.github.jinahya.juso.go.kr.api.proxy.stereotype" +
+              ".AddrLinkApiService" +
               ".retrieve(..)" +
               ")")
     void retrieve() {
     }
 
-    @Around("retrieve()  && args(request)")
+    @Around("retrieve() && args(request)")
     @SuppressWarnings({
             "unchecked"
     })
     Object __(final ProceedingJoinPoint joinPoint, final AddrLinkApiRequest request) throws Throwable {
-        log.debug("------> request: {}", request);
         return ((Mono<AddrLinkApiResponse>) joinPoint.proceed())
-                .handle((v, s) -> {
-                    log.debug("----> response: {}", v);
-                    s.next(v);
+                .doOnEach(signal -> {
+                    Optional.ofNullable(signal.getThrowable()).ifPresent(t -> {
+                        log.error("failed to retrieve");
+                    });
+                })
+                .doOnSuccess(response -> {
                 });
     }
 }

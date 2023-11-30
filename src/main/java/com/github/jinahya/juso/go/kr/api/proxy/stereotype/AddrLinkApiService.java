@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -23,12 +24,12 @@ import reactor.core.publisher.Mono;
 @NoArgsConstructor(access = AccessLevel.PACKAGE)
 @Slf4j
 public class AddrLinkApiService
-        extends _BaseService {
+        extends _BaseService<AddrLinkApiRequest, AddrLinkApiResponse> {
 
     public static final String CACHE_NAME_ADDR_LINK = AddrLinkApiConfigurationProperties.BASE_URL;
 
     // -----------------------------------------------------------------------------------------------------------------
-//    @Cacheable(cacheNames = {CACHE_NAME_ADDR_LINK})
+    @Cacheable(cacheNames = {CACHE_NAME_ADDR_LINK})
     @Validated({__BaseTypeGroup.class})
     public Mono<AddrLinkApiResponse> retrieve(@Valid @NotNull final AddrLinkApiRequest request) {
         return webClient
