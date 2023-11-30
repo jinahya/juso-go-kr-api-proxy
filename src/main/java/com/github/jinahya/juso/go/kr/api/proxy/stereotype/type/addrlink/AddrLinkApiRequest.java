@@ -6,17 +6,8 @@ import com.github.jinahya.juso.go.kr.api.proxy.stereotype.type._PropertyEnum;
 import com.github.jinahya.juso.go.kr.api.proxy.stereotype.type.__BaseTypeConstants;
 import com.github.jinahya.juso.go.kr.api.proxy.stereotype.type.__BaseTypeGroup;
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
-import lombok.Builder;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import jakarta.validation.constraints.*;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 import lombok.extern.jackson.Jacksonized;
 import org.springframework.lang.Nullable;
@@ -52,7 +43,7 @@ public class AddrLinkApiRequest
 
     public static final int PROPERTY_MAX_COUNT_PER_PAGE = 100;
 
-    private static final int PROPERTY_DEFAULT_VALUE_COUNT_PER_PAGE = 10;
+    public static final int PROPERTY_DEFAULT_VALUE_COUNT_PER_PAGE = 10;
 
     // --------------------------------------------------------------------------------------------------------- keyword
     public static final String PROPERTY_NAME_KEYWORD = "keyword";

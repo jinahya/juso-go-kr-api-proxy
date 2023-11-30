@@ -20,16 +20,12 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.http.MediaType;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
 import java.util.Objects;
+import java.util.Optional;
 
 @Validated
 @RestController
@@ -51,11 +47,18 @@ class AddrLinkApiController
         if (request.getConfmKey() == null) {
             request.setConfmKey(properties.getConfmKey());
         }
-        if (request.getCurrentPage() == null && page != null) {
-            request.setCurrentPage(page + 1);
+        if (request.getCurrentPage() == null) {
+            request.setCurrentPage(
+                    Optional.ofNullable(page)
+                            .map(v -> v + 1)
+                            .orElse(AddrLinkApiRequest.PROPERTY_DEFAULT_VALUE_CURRENT_PAGE)
+            );
         }
-        if (request.getCountPerPage() == null && size != null) {
-            request.setCountPerPage(size);
+        if (request.getCountPerPage() == null) {
+            request.setCountPerPage(
+                    Optional.ofNullable(size)
+                            .orElse(AddrLinkApiRequest.PROPERTY_DEFAULT_VALUE_COUNT_PER_PAGE)
+            );
         }
         request.setKeyword(KeywordUtils.filter(request.getKeyword()));
         request.setResultType(AddrLinkApiRequest.PROPERTY_VALUE_RESULT_TYPE_JSON);
