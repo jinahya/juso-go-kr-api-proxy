@@ -31,6 +31,12 @@ public class AddrLinkApiResultJuso
     @Serial
     private static final long serialVersionUID = -8860272291125680568L;
 
+    // -----------------------------------------------------------------------------------------------------------------
+//    @Override
+//    public boolean canEqual(final Object obj) {
+//        return obj instanceof AddrLinkApiResultJuso;
+//    }
+
     // -------------------------------------------------------------------------------------------------------- roadAddr
 
     // --------------------------------------------------------------------------------------------------- roadAddrPart1

@@ -1,6 +1,5 @@
 package com.github.jinahya.juso.go.kr.api.proxy.stereotype.type.addrlink;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -9,7 +8,6 @@ import java.io.IOException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@Disabled
 class AddrCoordApiResponseTest
         extends _AddrlinkResponseTypeTest<AddrCoordApiResponse> {
 

@@ -27,6 +27,10 @@ public class AddrCoordApiResultJuso
     private static final long serialVersionUID = -3903289972124704464L;
 
     // -----------------------------------------------------------------------------------------------------------------
+//    @Override
+//    public boolean canEqual(final Object obj) {
+//        return obj instanceof AddrCoordApiResultJuso;
+//    }
 
     // -----------------------------------------------------------------------------------------------------------------
 

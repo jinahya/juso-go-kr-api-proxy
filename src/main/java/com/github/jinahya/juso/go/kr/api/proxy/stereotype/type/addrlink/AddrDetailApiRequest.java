@@ -44,6 +44,12 @@ public class AddrDetailApiRequest
 
     public static final String PROPERTY_VALUE_UDRT_1 = "1";
 
+    // -----------------------------------------------------------------------------------------------------------------
+//    @Override
+//    public boolean canEqual(final Object obj) {
+//        return obj instanceof AddrDetailApiRequest;
+//    }
+
     // -------------------------------------------------------------------------------------------------------- buldMnnm
 
     // -------------------------------------------------------------------------------------------------------- buldSlno

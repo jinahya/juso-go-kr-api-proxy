@@ -6,6 +6,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.experimental.Accessors;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.api.SingleTypeEqualsVerifierApi;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +34,24 @@ public abstract class __BaseTypeTest<TYPE extends __BaseType> {
     protected __BaseTypeTest(final Class<TYPE> typeClass) {
         super();
         this.typeClass = Objects.requireNonNull(typeClass, "typeClass is null");
+    }
+
+    // -----------------------------------------------------------------------------------------------------------------
+    @Test
+    void toString_NotBlank_() {
+        final var instance = newTypeInstance();
+        final var string = instance.toString();
+        assertThat(string).isNotBlank();
+    }
+
+    // -----------------------------------------------------------------------------------------------------------------
+    protected SingleTypeEqualsVerifierApi<TYPE> equalsVerifier() {
+        return EqualsVerifier.simple().forClass(typeClass);
+    }
+
+    @Test
+    protected void equals_Verify_() {
+        equalsVerifier().verify();
     }
 
     // -----------------------------------------------------------------------------------------------------------------

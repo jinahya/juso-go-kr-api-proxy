@@ -6,7 +6,6 @@ import com.github.jinahya.juso.go.kr.api.proxy.stereotype.type._BaseResultsType;
 import com.github.jinahya.juso.go.kr.api.proxy.stereotype.type.__BaseTypeConstants;
 import com.github.jinahya.juso.go.kr.api.proxy.stereotype.type.addrlink.AddrCoordApiRequest;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration;
@@ -15,7 +14,6 @@ import org.springframework.test.context.ContextConfiguration;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@Disabled
 @ContextConfiguration(
         classes = {
                 AddrCoordApiService.class,

@@ -1,0 +1,24 @@
+{
+  "results": {
+    "common": {
+      "totalCount": 1,
+      "currentPage": null,
+      "countPerPage": null,
+      "errorCode": "0",
+      "errorMessage": "정상"
+    },
+    "juso": [
+      {
+        "admCd": "1135010200",
+        "rnMgtSn": "113503109006",
+        "udrtYn": "0",
+        "buldMnnm": 111,
+        "buldSlno": 0,
+        "bdMgtSn": "1135010200100130000018705",
+        "entX": "961766.241512331",
+        "entY": "1958522.7469492066",
+        "bdNm": "월계미륭아파트,월계삼호아파트"
+      }
+    ]
+  }
+}

@@ -26,6 +26,9 @@ import java.util.Optional;
 @NoArgsConstructor
 @Jacksonized
 @SuperBuilder(toBuilder = true)
+@SuppressWarnings({
+        "java:S117" // (..._)
+})
 public class AddrCoordApiRequest
         extends _AddrlinkType {
 
@@ -48,10 +51,15 @@ public class AddrCoordApiRequest
     // -------------------------------------------------------------------------------------------------------- buldSlno
 
     // ------------------------------------------------------------------------------------------------------ resultType
+    public static final String PROPERTY_VALUE_RESULT_TYPE_JSON = "json";
 
     // -----------------------------------------------------------------------------------------------------------------
 
     // -----------------------------------------------------------------------------------------------------------------
+//    @Override
+//    public boolean canEqual(final Object obj) {
+//        return obj instanceof AddrCoordApiRequest;
+//    }
 
     // -------------------------------------------------------------------------------------------------------- confmKey
 
