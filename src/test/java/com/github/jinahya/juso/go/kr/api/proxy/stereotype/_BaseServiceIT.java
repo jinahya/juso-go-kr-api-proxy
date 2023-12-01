@@ -9,14 +9,25 @@ import jakarta.validation.Validator;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.experimental.Accessors;
+import org.springframework.aop.aspectj.annotation.AnnotationAwareAspectJAutoProxyCreator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration;
+import org.springframework.boot.autoconfigure.validation.ValidationAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 
 import java.util.Objects;
 
+//@Import(AnnotationAwareAspectJAutoProxyCreator.class)
+@Import({
+        _BaseServiceAspectConfiguration.class,
+        AnnotationAwareAspectJAutoProxyCreator.class,
+        ValidationAutoConfiguration.class,
+        JacksonAutoConfiguration.class
+})
 @SpringBootTest
-public abstract class _BaseServiceIT<SERVICE extends _BaseService>
+public abstract class _BaseServiceIT<SERVICE extends _BaseService<?, ?>>
         extends __BaseServiceTestBase<SERVICE> {
 
     protected _BaseServiceIT(final Class<SERVICE> serviceClass) {

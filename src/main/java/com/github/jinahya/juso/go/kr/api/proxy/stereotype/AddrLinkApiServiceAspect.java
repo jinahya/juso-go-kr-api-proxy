@@ -5,15 +5,13 @@ import com.github.jinahya.juso.go.kr.api.proxy.stereotype.type.addrlink.AddrLink
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
-import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
-import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
 import java.util.Optional;
 
-@Component
-@Aspect
+//@Component
+//@Aspect
 @Slf4j
 class AddrLinkApiServiceAspect {
 

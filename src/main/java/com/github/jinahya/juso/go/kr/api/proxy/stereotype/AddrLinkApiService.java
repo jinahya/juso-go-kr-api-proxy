@@ -6,7 +6,6 @@ import com.github.jinahya.juso.go.kr.api.proxy.stereotype.type.__BaseTypeGroup;
 import com.github.jinahya.juso.go.kr.api.proxy.stereotype.type.addrlink.AddrLinkApiRequest;
 import com.github.jinahya.juso.go.kr.api.proxy.stereotype.type.addrlink.AddrLinkApiResponse;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -31,7 +30,7 @@ public class AddrLinkApiService
     // -----------------------------------------------------------------------------------------------------------------
     @Cacheable(cacheNames = {CACHE_NAME_ADDR_LINK})
     @Validated({__BaseTypeGroup.class})
-    public Mono<AddrLinkApiResponse> retrieve(@Valid @NotNull final AddrLinkApiRequest request) {
+    public Mono<AddrLinkApiResponse> retrieve(@Valid final AddrLinkApiRequest request) {
         return webClient
                 .get()
                 .uri(b -> {

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.jinahya.juso.go.kr.api.proxy.stereotype.type._BaseResponseType;
 import com.github.jinahya.juso.go.kr.api.proxy.stereotype.type._BaseType;
 import jakarta.annotation.PostConstruct;
+import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,7 +29,7 @@ public abstract class _BaseService<REQUEST extends _BaseType, RESPONSE extends _
     }
 
     // -----------------------------------------------------------------------------------------------------------------
-    public abstract Mono<RESPONSE> retrieve(REQUEST request);
+    public abstract Mono<RESPONSE> retrieve(@Valid REQUEST request);
 
     // -----------------------------------------------------------------------------------------------------------------
     @Autowired
