@@ -12,8 +12,13 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.PositiveOrZero;
 import lombok.AccessLevel;
-import lombok.RequiredArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.http.MediaType;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,7 +28,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
 @RestController
@@ -32,9 +36,12 @@ import reactor.core.publisher.Mono;
                 AddrEngApiController.REQUEST_MAPPING_PATH
         }
 )
-@RequiredArgsConstructor(access = AccessLevel.PACKAGE)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Slf4j
-class AddrEngApiController
+@SuppressWarnings({
+        "java:S6813"
+})
+public class AddrEngApiController
         extends _AddrLinkController {
 
     static final String REQUEST_MAPPING_PATH = AddrEngApiConfigurationProperties.REQUEST_URI;
@@ -61,8 +68,7 @@ class AddrEngApiController
                     MediaType.APPLICATION_JSON_VALUE
             }
     )
-    Mono<AddrEngApiResponse> get(
-            final ServerWebExchange exchange,
+    protected Mono<AddrEngApiResponse> get(
             @Valid
             @ModelAttribute final AddrEngApiRequest request,
             final BindingResult bindingResult,
@@ -87,8 +93,7 @@ class AddrEngApiController
                     MediaType.APPLICATION_JSON_VALUE
             }
     )
-    Mono<AddrEngApiResponse> post(
-            final ServerWebExchange exchange,
+    protected Mono<AddrEngApiResponse> post(
             @Valid @NotNull @RequestBody final AddrEngApiRequest request,
             @PositiveOrZero
             @RequestParam(name = WebBindConstants.PARAM_NAME_PAGE, required = false) final Integer page,
@@ -101,7 +106,12 @@ class AddrEngApiController
     }
 
     // -----------------------------------------------------------------------------------------------------------------
-    private final AddrEngApiConfigurationProperties properties;
+    @Autowired
+    private AddrEngApiConfigurationProperties properties;
 
-    private final AddrEngApiService service;
+    @Autowired
+    @Accessors(fluent = true)
+    @Setter(AccessLevel.NONE)
+    @Getter(AccessLevel.PROTECTED)
+    private AddrEngApiService service;
 }

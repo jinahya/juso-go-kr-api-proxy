@@ -3,6 +3,7 @@ package com.github.jinahya.juso.go.kr.api.proxy.context;
 import com.github.jinahya.juso.go.kr.api.proxy.context.properties._AddrApiConfigurationProperties;
 import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.Accessors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -24,8 +25,10 @@ abstract class _AddrApiConfiguration<PROPERTIES extends _AddrApiConfigurationPro
                 .build();
     }
 
+    // -----------------------------------------------------------------------------------------------------------------
     @Autowired
     @Accessors(fluent = true)
+    @Setter(AccessLevel.NONE)
     @Getter(AccessLevel.PROTECTED)
     private PROPERTIES properties;
 }

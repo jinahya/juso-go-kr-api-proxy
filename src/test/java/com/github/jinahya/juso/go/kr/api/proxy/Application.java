@@ -6,16 +6,8 @@ import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 @EnableAspectJAutoProxy
-@ConfigurationPropertiesScan(
-        basePackageClasses = {
-                com.github.jinahya.juso.go.kr.api.proxy._NoOp.class // not required; just for the documentation
-        }
-)
-@SpringBootApplication(
-        scanBasePackageClasses = {
-                com.github.jinahya.juso.go.kr.api.proxy._NoOp.class // not required; just for the documentation
-        }
-)
+@ConfigurationPropertiesScan
+@SpringBootApplication
 class Application {
 
     public static void main(final String... args) {

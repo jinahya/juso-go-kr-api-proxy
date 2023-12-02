@@ -6,12 +6,12 @@ import com.github.jinahya.juso.go.kr.api.proxy.stereotype.type.__BaseTypeGroup;
 import com.github.jinahya.juso.go.kr.api.proxy.stereotype.type.addrlink.AddrDetailApiRequest;
 import com.github.jinahya.juso.go.kr.api.proxy.stereotype.type.addrlink.AddrDetailApiResponse;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
@@ -41,6 +41,13 @@ public class AddrDetailApiService
                 })
                 .retrieve()
                 .bodyToMono(AddrDetailApiResponse.class);
+    }
+
+    // -----------------------------------------------------------------------------------------------------------------
+    @CacheEvict(cacheNames = {CACHE_NAME_ADDR_DETAIL})
+    @Override
+    public void evictCache() {
+        // empty
     }
 
     // -----------------------------------------------------------------------------------------------------------------

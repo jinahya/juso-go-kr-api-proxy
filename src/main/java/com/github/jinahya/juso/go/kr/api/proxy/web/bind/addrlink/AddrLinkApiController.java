@@ -13,10 +13,12 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.PositiveOrZero;
 import lombok.AccessLevel;
-import lombok.RequiredArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.http.MediaType;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -26,7 +28,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
 import java.util.Objects;
@@ -39,9 +40,12 @@ import java.util.Optional;
                 AddrLinkApiController.REQUEST_MAPPING_PATH
         }
 )
-@RequiredArgsConstructor(access = AccessLevel.PACKAGE)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Slf4j
-class AddrLinkApiController
+@SuppressWarnings({
+        "java:S6813"
+})
+public class AddrLinkApiController
         extends _AddrLinkController {
 
     static final String REQUEST_MAPPING_PATH = AddrLinkApiConfigurationProperties.REQUEST_URI;
@@ -76,8 +80,7 @@ class AddrLinkApiController
                     MediaType.APPLICATION_JSON_VALUE
             }
     )
-    Mono<AddrLinkApiResponse> get(
-            final ServerWebExchange exchange,
+    protected Mono<AddrLinkApiResponse> get(
             @Valid final AddrLinkApiRequest request,
             final BindingResult bindingResult,
             @PositiveOrZero
@@ -85,10 +88,8 @@ class AddrLinkApiController
             @Max(AddrLinkApiRequest.PROPERTY_MAX_COUNT_PER_PAGE)
             @Positive
             @RequestParam(name = WebBindConstants.PARAM_NAME_SIZE, required = false) final Integer size) {
-        bindingResult.getAllErrors().stream().forEach(e -> {
-            log.error("binding error: {}", e);
-        });
-        return post(exchange, request, page, size);
+        bindingResult.getAllErrors().forEach(e -> log.error("binding error: {}", e));
+        return post(request, page, size);
     }
 
     @PostMapping(
@@ -99,8 +100,7 @@ class AddrLinkApiController
                     MediaType.APPLICATION_JSON_VALUE
             }
     )
-    Mono<AddrLinkApiResponse> post(
-            final ServerWebExchange exchange,
+    protected Mono<AddrLinkApiResponse> post(
             @Valid @NotNull @RequestBody final AddrLinkApiRequest request,
             @PositiveOrZero
             @RequestParam(name = WebBindConstants.PARAM_NAME_PAGE, required = false) final Integer page,
@@ -112,12 +112,12 @@ class AddrLinkApiController
     }
 
     // -----------------------------------------------------------------------------------------------------------------
-    private final AddrLinkApiConfigurationProperties properties;
-
-    private final AddrLinkApiService service;
-
-    // -----------------------------------------------------------------------------------------------------------------
-    @Lazy
     @Autowired
-    private AddrLinkApiController self;
+    private AddrLinkApiConfigurationProperties properties;
+
+    @Autowired
+    @Accessors(fluent = true)
+    @Setter(AccessLevel.NONE)
+    @Getter(AccessLevel.PROTECTED)
+    private AddrLinkApiService service;
 }

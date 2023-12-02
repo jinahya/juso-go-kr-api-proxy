@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
@@ -19,7 +20,7 @@ import reactor.core.publisher.Mono;
 
 @Validated
 @Service
-@ToString
+@ToString(callSuper = true)
 @NoArgsConstructor(access = AccessLevel.PACKAGE)
 @Slf4j
 public class AddrCoordApiService
@@ -29,6 +30,7 @@ public class AddrCoordApiService
 
     // -----------------------------------------------------------------------------------------------------------------
     @Cacheable(cacheNames = {CACHE_NAME_ADDR_COORD})
+    @Override
     @Validated({__BaseTypeGroup.class})
     public Mono<AddrCoordApiResponse> retrieve(@Valid final AddrCoordApiRequest request) {
         return webClient
@@ -36,6 +38,14 @@ public class AddrCoordApiService
                 .uri(b -> b.queryParams(request.toMultivalueMap(objectMapper())).build())
                 .retrieve()
                 .bodyToMono(AddrCoordApiResponse.class);
+    }
+
+    // -----------------------------------------------------------------------------------------------------------------
+
+    @CacheEvict(cacheNames = {CACHE_NAME_ADDR_COORD})
+    @Override
+    public void evictCache() {
+        // empty
     }
 
     // -----------------------------------------------------------------------------------------------------------------

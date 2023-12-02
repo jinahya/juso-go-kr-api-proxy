@@ -8,14 +8,12 @@ import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import reactor.core.publisher.Mono;
 
-@ToString
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Slf4j
 @SuppressWarnings({
@@ -29,7 +27,20 @@ public abstract class _BaseService<REQUEST extends _BaseType, RESPONSE extends _
     }
 
     // -----------------------------------------------------------------------------------------------------------------
+
+    @Override
+    public String toString() {
+        return super.toString() + '{' +
+               "objectMapperBuilder=" + objectMapperBuilder +
+               ",objectMapper=" + objectMapper +
+               '}';
+    }
+
+    // -----------------------------------------------------------------------------------------------------------------
     public abstract Mono<RESPONSE> retrieve(@Valid REQUEST request);
+
+    // -----------------------------------------------------------------------------------------------------------------
+    public abstract void evictCache();
 
     // -----------------------------------------------------------------------------------------------------------------
     @Autowired
