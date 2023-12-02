@@ -13,12 +13,13 @@ import java.util.Objects;
 @Setter
 @Getter
 @Slf4j
-abstract class AddrRetrievalEvent<REQUEST extends _AddrlinkType, RESPONSE extends _AddrlinkResponseType<?>>
+public abstract class AddrRetrievalEvent<REQUEST extends _AddrlinkType, RESPONSE extends _AddrlinkResponseType<?>>
         extends ApplicationEvent {
 
     @Serial
     private static final long serialVersionUID = -1963957804595844675L;
 
+    // -----------------------------------------------------------------------------------------------------------------
     private static class Generic
             extends AddrRetrievalEvent<_AddrlinkType, _AddrlinkResponseType<?>> {
 
@@ -35,6 +36,7 @@ abstract class AddrRetrievalEvent<REQUEST extends _AddrlinkType, RESPONSE extend
         return new Generic(source, request, response);
     }
 
+    // -----------------------------------------------------------------------------------------------------------------
     AddrRetrievalEvent(final Object source, final REQUEST request, final RESPONSE response) {
         super(source);
         this.request = Objects.requireNonNull(request, "request is null");

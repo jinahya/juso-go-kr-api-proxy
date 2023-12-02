@@ -17,8 +17,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.ResolvableType;
 import reactor.core.publisher.Mono;
 
-import java.util.Optional;
-
 @Configuration
 @RequiredArgsConstructor(access = AccessLevel.PACKAGE)
 @Slf4j
@@ -55,12 +53,9 @@ class _BaseServiceAspectConfiguration {
                 final var resolved = ResolvableType.forInstance(result).as(Mono.class).getGeneric(0).resolve();
                 log.debug("resolved: {}", resolved);
                 return ((Mono<_AddrlinkResponseType<?>>) result)
-                        .doOnEach(signal -> {
-                            Optional.ofNullable(signal.get()).ifPresent(response -> {
-                                final var event =
-                                        AddrRetrievalEvent.newInstance(this, (_AddrlinkType) request, response);
-                                publisher.publishEvent(event);
-                            });
+                        .doOnSuccess(response -> {
+                            final var event = AddrRetrievalEvent.newInstance(this, (_AddrlinkType) request, response);
+                            publisher.publishEvent(event);
                         });
             }
         });
