@@ -32,7 +32,7 @@ class AddrLinkApiServiceIT
     // -----------------------------------------------------------------------------------------------------------------
     @ValueSource(strings = {
             "한국지역정보개발원",
-//            "청와대"
+            "청와대"
     })
     @ParameterizedTest
     void retrieve__(final String keyword) {
@@ -48,6 +48,7 @@ class AddrLinkApiServiceIT
             // ---------------------------------------------------------------------------------------------------- when
             final var response = serviceInstance().retrieve(request).block();
             log.debug("response: {}", response);
+            assert response != null;
             printPretty(response);
             // ---------------------------------------------------------------------------------------------------- then
             assertThat(response).isNotNull().satisfies(r -> {

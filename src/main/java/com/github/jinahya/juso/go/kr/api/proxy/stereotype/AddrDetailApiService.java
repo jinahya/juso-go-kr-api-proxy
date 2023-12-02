@@ -31,7 +31,7 @@ public class AddrDetailApiService
     // -----------------------------------------------------------------------------------------------------------------
     @Cacheable(cacheNames = {CACHE_NAME_ADDR_DETAIL})
     @Validated({__BaseTypeGroup.class})
-    public Mono<AddrDetailApiResponse> retrieve(@Valid @NotNull final AddrDetailApiRequest request) {
+    public Mono<AddrDetailApiResponse> retrieve(@Valid final AddrDetailApiRequest request) {
         return webClient
                 .get()
                 .uri(b -> {

@@ -6,7 +6,6 @@ import com.github.jinahya.juso.go.kr.api.proxy.stereotype.type.__BaseTypeGroup;
 import com.github.jinahya.juso.go.kr.api.proxy.stereotype.type.addrlink.AddrCoordApiRequest;
 import com.github.jinahya.juso.go.kr.api.proxy.stereotype.type.addrlink.AddrCoordApiResponse;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -31,14 +30,10 @@ public class AddrCoordApiService
     // -----------------------------------------------------------------------------------------------------------------
     @Cacheable(cacheNames = {CACHE_NAME_ADDR_COORD})
     @Validated({__BaseTypeGroup.class})
-    public Mono<AddrCoordApiResponse> retrieve(@Valid @NotNull final AddrCoordApiRequest request) {
+    public Mono<AddrCoordApiResponse> retrieve(@Valid final AddrCoordApiRequest request) {
         return webClient
                 .get()
-                .uri(b -> {
-                    final var built = b.queryParams(request.toMultivalueMap(objectMapper())).build();
-                    log.debug("built: {}", built);
-                    return built;
-                })
+                .uri(b -> b.queryParams(request.toMultivalueMap(objectMapper())).build())
                 .retrieve()
                 .bodyToMono(AddrCoordApiResponse.class);
     }

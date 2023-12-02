@@ -1,9 +1,9 @@
 package com.github.jinahya.juso.go.kr.api.proxy.util;
 
-import java.io.File;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.URISyntaxException;
-import java.nio.file.Files;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedHashSet;
@@ -18,17 +18,19 @@ final class SqlReservedWords {
     private static final String NAME = "sql-reserved-words.txt";
 
     private static Set<String> loadSqlReservedWords() throws URISyntaxException, IOException {
-        final var resource = SqlReservedWords.class.getResource(NAME);
-        if (resource == null) {
-            throw new RuntimeException("no resource loaded for " + NAME);
-        }
-        try (var stream = Files.lines(new File(resource.toURI()).toPath())) {
-            return stream
-                    .map(String::strip)
-                    .filter(v -> !v.isBlank())
-                    .filter(v -> !v.startsWith("#"))
-                    .sorted(Comparator.comparingInt(String::length).reversed())
-                    .collect(Collectors.toCollection(LinkedHashSet::new));
+        try (final var resource = SqlReservedWords.class.getResourceAsStream(NAME)) {
+            if (resource == null) {
+                throw new RuntimeException("no resource loaded for " + NAME);
+            }
+            try (var reader = new BufferedReader(new InputStreamReader(resource));
+                 var lines = reader.lines()) {
+                return lines
+                        .map(String::strip)
+                        .filter(v -> !v.isBlank())
+                        .filter(v -> !v.startsWith("#"))
+                        .sorted(Comparator.comparingInt(String::length).reversed())
+                        .collect(Collectors.toCollection(LinkedHashSet::new));
+            }
         }
     }
 

@@ -32,7 +32,7 @@ public class AddrEngApiService
     // -----------------------------------------------------------------------------------------------------------------
     @Cacheable(cacheNames = {CACHE_NAME_ADDR_ENG})
     @Validated({__BaseTypeGroup.class})
-    public Mono<AddrEngApiResponse> retrieve(@Valid @NotNull final AddrEngApiRequest request) {
+    public Mono<AddrEngApiResponse> retrieve(@Valid final AddrEngApiRequest request) {
         return webClient
                 .get()
                 .uri(b -> request.put(b).build())
