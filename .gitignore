@@ -33,9 +33,10 @@ buildNumber.properties
 
 
 doc/guideCoordApi
+doc/guideDetailApi
+doc/guideMapApi
 doc/guideSearchApi
+doc/guideSearchApiEng
 
 
-src/test/resources/application.yaml
 src/test/resources/application-private.yaml
-src/test/resources/application-extended.yaml

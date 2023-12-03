@@ -1,9 +1,9 @@
 package com.github.jinahya.juso.go.kr.api.proxy.web.bind.addrlink;
 
-import com.github.jinahya.juso.go.kr.api.proxy.context.properties.AddrLinkApiConfigurationProperties;
-import com.github.jinahya.juso.go.kr.api.proxy.stereotype.AddrLinkApiService;
-import com.github.jinahya.juso.go.kr.api.proxy.stereotype.type.addrlink.AddrLinkApiRequest;
-import com.github.jinahya.juso.go.kr.api.proxy.stereotype.type.addrlink.AddrLinkApiResponse;
+import com.github.jinahya.juso.go.kr.api.proxy.context.properties.AddrEngApiConfigurationProperties;
+import com.github.jinahya.juso.go.kr.api.proxy.stereotype.AddrEngApiService;
+import com.github.jinahya.juso.go.kr.api.proxy.stereotype.type.addrlink.AddrEngApiRequest;
+import com.github.jinahya.juso.go.kr.api.proxy.stereotype.type.addrlink.AddrEngApiResponse;
 import com.github.jinahya.juso.go.kr.api.proxy.web.bind.WebBindConstants;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
@@ -25,23 +25,23 @@ import static org.mockito.Mockito.verify;
 
 @WebFluxTest(
         controllers = {
-                AddrLinkApiController.class
+                AddrEngApiController.class
         }
 )
 @Slf4j
-class AddrLinkApiControllerWebFluxTest
-        extends _AddrlinkControllerWebFluxTest<AddrLinkApiController> {
+class AddrEngApiControllerWebFluxTest
+        extends _AddrlinkControllerWebFluxTest<AddrEngApiController> {
 
     // -----------------------------------------------------------------------------------------------------------------
-    AddrLinkApiControllerWebFluxTest() {
-        super(AddrLinkApiController.class);
+    AddrEngApiControllerWebFluxTest() {
+        super(AddrEngApiController.class);
     }
 
     @BeforeEach
     void __() {
-        given(service.retrieve(notNull(AddrLinkApiRequest.class))).willAnswer(i -> {
-            final var request = i.getArgument(0, AddrLinkApiRequest.class);
-            final var response = AddrLinkApiResponse.builder()
+        given(service.retrieve(notNull(AddrEngApiRequest.class))).willAnswer(i -> {
+            final var request = i.getArgument(0, AddrEngApiRequest.class);
+            final var response = AddrEngApiResponse.builder()
                     .build();
             return Mono.just(response);
         });
@@ -56,14 +56,13 @@ class AddrLinkApiControllerWebFluxTest
     @ParameterizedTest
     void get__(final String keyword) {
         // ------------------------------------------------------------------------------------------------------- given
-        final var request = new AddrLinkApiRequest();
+        final var request = new AddrEngApiRequest();
         request.setKeyword(keyword);
         // --------------------------------------------------------------------------------------------------- when/then
         final var result = webTestClient()
                 .get()
                 .uri(b -> {
-                    return b
-                            .path(AddrLinkApiController.REQUEST_MAPPING_PATH)
+                    return b.path(AddrEngApiController.REQUEST_MAPPING_PATH)
                             .queryParams(request.toMultivalueMap(objectMapper()))
                             .queryParam(WebBindConstants.PARAM_NAME_PAGE, 0)
                             .queryParam(WebBindConstants.PARAM_NAME_SIZE, 5)
@@ -72,7 +71,7 @@ class AddrLinkApiControllerWebFluxTest
                 .exchange()
                 .expectStatus()
                 .isOk()
-                .expectBody(AddrLinkApiResponse.class)
+                .expectBody(AddrEngApiResponse.class)
                 .returnResult();
         final var response = result.getResponseBody();
         assertThat(response).isNotNull();
@@ -89,13 +88,13 @@ class AddrLinkApiControllerWebFluxTest
     @ParameterizedTest
     void post__(final String keyword) {
         // ------------------------------------------------------------------------------------------------------- given
-        final var request = new AddrLinkApiRequest();
+        final var request = new AddrEngApiRequest();
         request.setKeyword(keyword);
         // --------------------------------------------------------------------------------------------------- when/then
         final var result = webTestClient()
                 .post()
                 .uri(b -> {
-                    return b.path(AddrLinkApiController.REQUEST_MAPPING_PATH)
+                    return b.path(AddrEngApiController.REQUEST_MAPPING_PATH)
                             .queryParam(WebBindConstants.PARAM_NAME_PAGE, 0)
                             .queryParam(WebBindConstants.PARAM_NAME_SIZE, 5)
                             .build();
@@ -105,7 +104,7 @@ class AddrLinkApiControllerWebFluxTest
                 .exchange()
                 .expectStatus()
                 .isOk()
-                .expectBody(AddrLinkApiResponse.class)
+                .expectBody(AddrEngApiResponse.class)
                 .returnResult();
         final var response = result.getResponseBody();
         assertThat(response).isNotNull();
@@ -116,10 +115,9 @@ class AddrLinkApiControllerWebFluxTest
     }
 
     // -----------------------------------------------------------------------------------------------------------------
+    @MockBean
+    private AddrEngApiConfigurationProperties properties;
 
     @MockBean
-    private AddrLinkApiConfigurationProperties properties;
-
-    @MockBean
-    private AddrLinkApiService service;
+    private AddrEngApiService service;
 }

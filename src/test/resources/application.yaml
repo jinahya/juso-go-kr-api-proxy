@@ -1,0 +1,33 @@
+# https://spring.io/blog/2020/08/14/config-file-processing-in-spring-boot-2-4
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - beans
+          - health
+          - info
+#          - openapi
+#          - swagger-ui
+
+spring:
+  profiles:
+    group:
+      default: private
+
+springdoc:
+  #  use-management-port: true
+  packagesToScan: com.github
+  show-actuator: false
+#  swagger-ui:
+#    path: swagger-ui.html
+
+# ----------------------------------------------------------------------------------------------------------------------
+---
+spring:
+  config:
+    import: application-private.yaml
+  profiles:
+    active:
+      - private

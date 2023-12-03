@@ -30,7 +30,7 @@ public abstract class _BaseControllerWebFluxTest<CONTROLLER extends _BaseControl
     // -----------------------------------------------------------------------------------------------------------------
     @PostConstruct
     private void doOnPostConstruct() {
-//        webTestClient = WebTestClient.bindToController(controllerInstance).build();
+//        webTestClient = WebTestClient.bindToController(controllerClass).build();
         objectMapper = objectMapperBuilder.build();
     }
 
@@ -50,6 +50,9 @@ public abstract class _BaseControllerWebFluxTest<CONTROLLER extends _BaseControl
     }
 
     // -----------------------------------------------------------------------------------------------------------------
+//    @Autowired
+//    private AddrLinkApiController controllerInstance;
+
     @Autowired
     @Accessors(fluent = true)
     @Setter(AccessLevel.NONE)
